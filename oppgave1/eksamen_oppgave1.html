@@ -46,10 +46,7 @@
 
         function display(val) {
             document.getElementById("calculation").value += val
-
-            console.log(val);
             return val
-            
         }
 
         function solve() {
@@ -67,22 +64,22 @@
         }
 
         /* D-krav: lag funksjonalitet som lagrer mattestykket som står i skjermen ved klikk på Add-knapp */
-            let storeNumbers = [];
-            let num1 = val
-            let num2 = val
+        let storeNumbers = [];
+    
+        function addMemory() {    
+            let calculation = document.getElementById("calculation").value
 
-        function addMemory(num1, num2) {
-            /* teori: vil at funksjonen skal legge til result fra solve() for hver gang det trykkes Add*/
-            /*storeNumbers += value;*/
-
-            let resultMemory = num1 + num2;
-            storeNumbers.push(resultMemory);
-            console.log(storeNumbers);
-            
-            /*document.getElementById("memory-add").innerText = storeNumbers;*/
-            document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
+            if (calculation != "") {
+                storeNumbers.push(calculation); 
+                document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
+                console.log(storeNumbers);  
+            }
         }
-        addMemory(num1, num2);
+
+        /* C-krav: Lag funksjonalitet som henter ut det siste lagrede mattestykket i memory ved å klikke Previous-knappen, og skriv dette mattestykket til skjermen */
+
+        let lastStoreNumber = storeNumbers[1]
+        console.log(lastStoreNumber);
 
     </script>
 </body>
