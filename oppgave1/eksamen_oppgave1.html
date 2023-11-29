@@ -54,16 +54,26 @@
             document.getElementById("calculation").value = result            
         }
        
-        /* 
-        solve()-funksjon:
+        /* solve()-funksjon:
             Her er det deklarert to variabler: calculation og result.
             calculation bruker metoden getElementById for å lokalisere id="calculation" og bruker metoden .value for hente ut verdien som er angitt der.
-            result bruker funksjonen eval() som evaluerer variabelen calculation og bruker metoden .value for å hente ut verdien angitt der og 
+            result bruker funksjonen eval() til å evaluere variablen over som inneholder streng fra brukerinputs (det som tastes inn på kalkulatoren).
             */
 
         function clearScreen() {
             document.getElementById("calculation").value = ""
         }
+
+        function addMemory() {
+            document.getElementById("memory-bank").value 
+            document.getElementById("memory-bank").innerHTML ++ /* Øker visuelisering av antallet */
+
+            console.log(addMemory)
+
+        }
+
+        addMemory()
+
     </script>
 </body>
 </html>
