@@ -51,9 +51,15 @@
         function solve() {
             let calculation = document.getElementById("calculation").value
             let result = eval(calculation)
-            document.getElementById("calculation").value = result
-            return result
+            document.getElementById("calculation").value = result            
         }
+       
+        /* 
+        solve()-funksjon:
+            Her er det deklarert to variabler: calculation og result.
+            calculation bruker metoden getElementById for å lokalisere id="calculation" og bruker metoden .value for hente ut verdien som er angitt der.
+            result bruker funksjonen eval() som evaluerer variabelen calculation og bruker metoden .value for å hente ut verdien angitt der og 
+            */
 
         function clearScreen() {
             document.getElementById("calculation").value = ""
