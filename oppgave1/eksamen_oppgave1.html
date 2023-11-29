@@ -43,6 +43,8 @@
     </article>
 
     <script>
+        let storeNumbers = '';
+
         function display(val) {
             document.getElementById("calculation").value += val
             return val
@@ -51,30 +53,34 @@
         function solve() {
             let calculation = document.getElementById("calculation").value
             let result = eval(calculation)
-            document.getElementById("calculation").value = result            
+            document.getElementById("calculation").value = result
+            
+            addMemory(' ' + result);
         }
        
-        /* solve()-funksjon:
+        /* E-krav forklar solve()-funksjon:
             Her er det deklarert to variabler: calculation og result.
             calculation bruker metoden getElementById for å lokalisere id="calculation" og bruker metoden .value for hente ut verdien som er angitt der.
             result bruker funksjonen eval() til å evaluere variablen over som inneholder streng fra brukerinputs (det som tastes inn på kalkulatoren).
-            */
+        */
 
         function clearScreen() {
             document.getElementById("calculation").value = ""
+
+            addMemory(' ');
         }
 
-        function addMemory() {
+        /* D-krav: lag funksjonalitet som lagrer mattestykket som står i skjermen ved klikk på Add-knapp */
+
+        function addMemory(result) {
             /* teori: vil at funksjonen skal legge til result fra solve() for hver gang det trykkes Add*/
-           /* document.getElementById("memory-bank").innerHTML ++ /* Øker visuelisering av antallet */
+            storeNumbers += result;
+            /*document.getElementById("memory-add").innerText = storeNumbers;*/
 
-           let memoryStorage = [];
-
-           for (i = 0; 1 <= input; i++) {
-            memoryStorage.push(i);
-           }
-           return memoryStorage;
+            document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
+            console.log(storeNumbers);
         }
+
 
 
     </script>
