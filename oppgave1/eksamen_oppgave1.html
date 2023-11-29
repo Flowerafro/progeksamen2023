@@ -43,7 +43,6 @@
     </article>
 
     <script>
-        let storeNumbers = '';
 
         function display(val) {
             document.getElementById("calculation").value += val
@@ -54,34 +53,32 @@
             let calculation = document.getElementById("calculation").value
             let result = eval(calculation)
             document.getElementById("calculation").value = result
-            
-            addMemory(' ' + result);
         }
-       
         /* E-krav forklar solve()-funksjon:
             Her er det deklarert to variabler: calculation og result.
             calculation bruker metoden getElementById for å lokalisere id="calculation" og bruker metoden .value for hente ut verdien som er angitt der.
             result bruker funksjonen eval() til å evaluere variablen over som inneholder streng fra brukerinputs (det som tastes inn på kalkulatoren).
         */
-
         function clearScreen() {
             document.getElementById("calculation").value = ""
-
-            addMemory(' ');
         }
 
         /* D-krav: lag funksjonalitet som lagrer mattestykket som står i skjermen ved klikk på Add-knapp */
 
-        function addMemory(result) {
+        let storeNumbers = [];
+
+        function addMemory() {
             /* teori: vil at funksjonen skal legge til result fra solve() for hver gang det trykkes Add*/
-            storeNumbers += result;
-            /*document.getElementById("memory-add").innerText = storeNumbers;*/
+            /*storeNumbers += value;*/
 
-            document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
+            storeNumbers.push("her skal innholdet fra id calculation vises")
             console.log(storeNumbers);
+             
+            /*document.getElementById("memory-add").innerText = storeNumbers;*/
+            document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
+
+           
         }
-
-
 
     </script>
 </body>
