@@ -37,7 +37,7 @@
         <div id="memory">
             <p>Memory (<span id="memory-bank">0</span>)</p>
             <button id="memory-add" onclick="addMemory()">Add</button>
-            <button id="memory-browseback" disabled>Previous</button>
+            <button id="memory-browseback" onclick="prevMemory()">Previous</button> <!-- endret fra disabled til onClick for å utføre krav C -->
             <button id="memory-browseforward" disabled>Next</button>
         </div>
     </article>
@@ -64,22 +64,23 @@
         }
 
         /* D-krav: lag funksjonalitet som lagrer mattestykket som står i skjermen ved klikk på Add-knapp */
-        let storeNumbers = [];
+        let storeMemory = [];
     
         function addMemory() {    
             let calculation = document.getElementById("calculation").value
 
             if (calculation != "") {
-                storeNumbers.push(calculation); 
+                storeMemory.push(calculation); 
                 document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
-                console.log(storeNumbers);  
+                console.log(storeMemory);  
             }
         }
-
         /* C-krav: Lag funksjonalitet som henter ut det siste lagrede mattestykket i memory ved å klikke Previous-knappen, og skriv dette mattestykket til skjermen */
 
-        let lastStoreNumber = storeNumbers[1]
-        console.log(lastStoreNumber);
+        function prevMemory() {
+            const lastMemory = storeMemory[storeMemory.length - 1];
+            console.log(lastMemory);  
+        }
 
     </script>
 </body>
