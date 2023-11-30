@@ -31,54 +31,31 @@
         canvas.height = 500
         const ctx = canvas.getContext("2d")
 
-          // funksjon for tilfeldig valgt verdier ( brukt til plassering av square og circle)
-
-          function randomGenerator(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min)
-        }
-
         //TODO: Storage of multiple element objects (Grade C and above)
         const elements = [
             {type: "square", x: 23, y: 220},
             {type: "circle", x: 381, y: 444}
         ]
 
-            //TODO: Function to add an element of parameter type 'square' or 'circle'
+        //TODO: Function to add an element of parameter type 'square' or 'circle':
+        
 
-            //TODO: Function to remove random element:
+        //TODO: Function to remove random element:
+        
 
-            //TODO: EventListeners to track user input:
-
-            //TODO: Count the element types and total and print to interface
+        //TODO: EventListeners to track user input:
 
 
-         //Function to draw on canvas:
-         function renderDrawings() {
+        //TODO: Count the element types and total and print to interface
+
+        
+        //Function to draw on canvas:
+        function renderDrawings() {
             //Clear the rectangle
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            const squareBtn = document.getElementById("sbutton");
-            squareBtn.addEventListener("click", drawSquare);
-
-            function drawSquare() {
-            const square = {
-            x: randomGenerator(8, canvas.width - 8), // 8px sånn at den ikke går utenfor kanten
-            y: randomGenerator(8, canvas.height - 8),
-            }
-
-            ctx.fillStyle = "#0000FF";
-            ctx.beginPath();
-            ctx.rect(square.x, square.y, 8, 8);
-            ctx.fill()
-
-        console.log("Square drawn");
-
-        drawSquare();
-        }
-        
-
             //TODO: Draw the elements on canvas:
-            
+
 
             //Testprint:
             console.log("Currently drawing frames...")
