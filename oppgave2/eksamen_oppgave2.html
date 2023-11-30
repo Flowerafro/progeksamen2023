@@ -38,8 +38,8 @@
             }
 
         const square = {
-            x: null, //randomGenerator(50, canvas.width - 100), 
-            y: null,  //randomGenerator(50, canvas.height - 100),
+            x: randomGenerator(50, canvas.width - 100), 
+            y: randomGenerator(50, canvas.height - 100),
             width: 8,
             height: 8
             }
@@ -51,10 +51,12 @@
             height: 13
             }
 
-        canvas.addEventListener("click", function(event){
+        const sbtn = document.getElementById("sbutton")
+        sbtn.addEventListener("click", function(event){
             square.x = event.x;
             square.y = event.y;
-            console.log(event);
+            drawFigures();
+            console.log("SBTN CLICKKKKKkkk");
             })
 
         function drawFigures() {
@@ -80,9 +82,6 @@
             //TODO: Function to remove random element:
 
             //TODO: EventListeners to track user input:
-            /*const sbtn = document.getElementById("sbutton")
-            sbtn.addEventListener("click", () => console.log("s-knappen klikkety-klikk")); */
-
 
             //TODO: Count the element types and total and print to interface
 
