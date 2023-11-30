@@ -33,12 +33,35 @@
 
         //TODO: Storage of multiple element objects (Grade C and above)
         const elements = [
-            {type: "square", x: 23, y: 220},
-            {type: "circle", x: 381, y: 444}
+            {
+                type: "square", 
+                x: 23, 
+                y: 220,
+                width: 8,
+                height: 8},
+            {
+                type: "circle", 
+                x: 381, 
+                y: 444}
         ]
 
         //TODO: Function to add an element of parameter type 'square' or 'circle':
+
+         //Legger til en addEventListner for å fange opp tastetrykk og klikk for til funksjon for å tegne blå firkant
+        const sbtn = document.getElementById("sbutton")
+         
+        sbtn.addEventListener("click", randomSquare)
+        document.addEventListener("keydown", randomSquare ) 
         
+        function randomSquare() {
+            console.log("s-knappen er trykket");
+
+            ctx.beginPath();
+            ctx.rect(23, 220, 8, 8);
+            ctx.fillStyle = "#2db3b8";
+            ctx.fill();
+            ctx.closePath();
+        }
 
         //TODO: Function to remove random element:
         
