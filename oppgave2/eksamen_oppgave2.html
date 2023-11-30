@@ -32,20 +32,30 @@
         const ctx = canvas.getContext("2d")
 
         let squareBtn = document.querySelector("#sbutton");
+        let circleBtn = document.querySelector("#cbutton");
 
+        //Variabel til firkant
         let square = {
+            // x: 10; endret til randomNum
+            // y: 10; endret til randomNum
             width: 8,
-            height: 8,
-           /*  x: randomGenerator(8, canvas.width - 8), // 8px sånn at den ikke går utenfor kanten
-            y: randomGenerator(8, canvas.height - 8) */
+            height: 8
+        }
+        
+        //Variabel til sirkel
+        let circle = {
+            //x: 300, endret til randomNum
+            //y: 300, endret til randomNum
+            radius: 13,
+            startAngle: 0,
+            endAngle: Math.PI * 2 
         }
 
-        let circle = {
-            width: 13,
-            height: 13,
-        /*     x: randomGenerator(8, canvas.width - 13), // 8px sånn at den ikke går utenfor kanten
-            y: randomGenerator(8, canvas.height - 13) */
-        }
+        //variabel til tellere 
+        let squareCounter = 1; //å starte på 1 da teller den første klikk. Står den på 0, teller den ikke første klikk..
+        let circleCounter = 1;
+        let totalCounter = 1;
+
 
         //TODO: Storage of multiple element objects (Grade C and above)
         const elements = [
@@ -55,18 +65,19 @@
 
     //TODO: Function to add an element of parameter type 'square' or 'circle':
 
+// Tegne firkant
     const drawSquare = (x, y, fillColor = "#0000FF") => {
         function randomNum(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        
+        //ctx.clearRect(0, 0, canvas.width, canvas.height); Fjerner Square fra canvas
         ctx.fillStyle = fillColor;
         ctx.beginPath();
         ctx.fillRect(
-            randomNum(8, canvas.width - 8), 
-            randomNum(8, canvas.height - 8),
-            square.height,
+            randomNum(0, canvas.width - 8), 
+            randomNum(0, canvas.height - 8),
+            square.width,
             square.height
         );
     
@@ -79,9 +90,42 @@
 
     squareBtn.addEventListener("click", function () {
         drawSquare(square.x, square.y, (fillColor = "#0000FF"));
-        document.getElementById("squareCount")
+        document.getElementById("squareCount").innerHTML = squareCounter++
     })
-        
+
+
+// Tegne sirkel
+    const drawCircle = (x, y, fillColor = "#FFD700") => {
+        function randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = fillColor;
+        ctx.beginPath()
+        ctx.arc(
+            randomNum(13, canvas.width - 7),
+            randomNum(13, canvas.height - 7), 
+            circle.radius, 
+            circle.startAngle, 
+            circle.endAngle
+            /* randomNum(7, canvas.width - 7), 
+            randomNum(7, canvas.height - 7),
+            circle.radius,
+            circle.startAngle,
+            circle.endAngle */
+        );
+        ctx.fillStyle = "#FFD700"
+        ctx.fill();
+        ctx.closePath();
+
+        console.log("draw Circle", randomNum(8, canvas.width - 8));
+    }
+
+    circleBtn.addEventListener("click", function () {
+        drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
+        document.getElementById("circleCount").innerHTML = circleCounter++
+    })
+
 
             //TODO: Function to add an element of parameter type 'square' or 'circle'
 
