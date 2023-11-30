@@ -31,10 +31,20 @@
         canvas.height = 500
         const ctx = canvas.getContext("2d")
 
-          // funksjon for tilfeldig valgt verdier ( brukt til plassering av square og circle)
+        let squareBtn = document.querySelector("#sbutton");
 
-          function randomGenerator(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min)
+        let square = {
+            width: 8,
+            height: 8,
+           /*  x: randomGenerator(8, canvas.width - 8), // 8px sånn at den ikke går utenfor kanten
+            y: randomGenerator(8, canvas.height - 8) */
+        }
+
+        let circle = {
+            width: 13,
+            height: 13,
+        /*     x: randomGenerator(8, canvas.width - 13), // 8px sånn at den ikke går utenfor kanten
+            y: randomGenerator(8, canvas.height - 13) */
         }
 
         //TODO: Storage of multiple element objects (Grade C and above)
@@ -42,6 +52,36 @@
             {type: "square", x: 23, y: 220},
             {type: "circle", x: 381, y: 444}
         ]
+
+    //TODO: Function to add an element of parameter type 'square' or 'circle':
+
+    const drawSquare = (x, y, fillColor = "#0000FF") => {
+        function randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = fillColor;
+        ctx.beginPath();
+        ctx.fillRect(
+            randomNum(8, canvas.width - 8), 
+            randomNum(8, canvas.height - 8),
+            square.height,
+            square.height
+        );
+    
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        console.log("draw Sqaure", randomNum(8, canvas.width - 8));
+    }
+
+    squareBtn.addEventListener("click", function () {
+        drawSquare(square.x, square.y, (fillColor = "#0000FF"));
+        document.getElementById("squareCount")
+    })
+        
 
             //TODO: Function to add an element of parameter type 'square' or 'circle'
 
@@ -52,33 +92,13 @@
             //TODO: Count the element types and total and print to interface
 
 
-         //Function to draw on canvas:
-         function renderDrawings() {
+        //Function to draw on canvas:
+        function renderDrawings() {
             //Clear the rectangle
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            const squareBtn = document.getElementById("sbutton");
-            squareBtn.addEventListener("click", drawSquare);
-
-            function drawSquare() {
-            const square = {
-            x: randomGenerator(8, canvas.width - 8), // 8px sånn at den ikke går utenfor kanten
-            y: randomGenerator(8, canvas.height - 8),
-            }
-
-            ctx.fillStyle = "#0000FF";
-            ctx.beginPath();
-            ctx.rect(square.x, square.y, 8, 8);
-            ctx.fill()
-
-        console.log("Square drawn");
-
-     
-        }
-        
-
             //TODO: Draw the elements on canvas:
-            
+
 
             //Testprint:
             console.log("Currently drawing frames...")
@@ -86,7 +106,7 @@
             requestAnimationFrame(renderDrawings)
         }
         //Start drawing
-        renderDrawings()
+        //renderDrawings()
     </script>
 </body>
 </html>
