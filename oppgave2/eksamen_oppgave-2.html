@@ -31,65 +31,32 @@
         canvas.height = 500
         const ctx = canvas.getContext("2d")
 
-          // funksjon for tilfeldig valgt verdier ( brukt til plassering av square og circle)
-
-        function randomGenerator(min, max) {
-            return Math.floor(Math.random () * (max - min + 1) + min)
-            }
-
-        const square = {
-            x: null, //randomGenerator(50, canvas.width - 100), 
-            y: null,  //randomGenerator(50, canvas.height - 100),
-            width: 8,
-            height: 8
-            }
-
-        const circle = {
-            x: randomGenerator(50, canvas.width - 200),
-            y: randomGenerator(50, canvas.height - 200),
-            width: 13,
-            height: 13
-            }
-
-        canvas.addEventListener("click", function(event){
-            square.x = event.x;
-            square.y = event.y;
-            console.log(event);
-            })
-
-        function drawFigures() {
-            
-        }
-
-
-
-
         //TODO: Storage of multiple element objects (Grade C and above)
         const elements = [
             {type: "square", x: 23, y: 220},
             {type: "circle", x: 381, y: 444}
         ]
 
-            //TODO: Function to add an element of parameter type 'square' or 'circle'
+        //TODO: Function to add an element of parameter type 'square' or 'circle':
+        
 
-            //TODO: Function to remove random element:
+        //TODO: Function to remove random element:
+        
 
-            //TODO: EventListeners to track user input:
-            /*const sbtn = document.getElementById("sbutton")
-            sbtn.addEventListener("click", () => console.log("s-knappen klikkety-klikk")); */
-
-
-            //TODO: Count the element types and total and print to interface
+        //TODO: EventListeners to track user input:
 
 
-         //Function to draw on canvas:
-         function renderDrawings() {
+        //TODO: Count the element types and total and print to interface
+
+        
+        //Function to draw on canvas:
+        function renderDrawings() {
             //Clear the rectangle
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
             //TODO: Draw the elements on canvas:
-            ctx.fillRect(square.x, square.y, square.width, square.height)
-    
+        
+
 
             //Testprint:
             console.log("Currently drawing frames...")
@@ -98,6 +65,28 @@
         }
         //Start drawing
         renderDrawings()
+
+            /* 
+const sbtn = document.getElementById("sbutton")
+            sbtn.addEventListener("click", function(renderDrawings) {
+        
+            })
+    
+
+                document.addEventListener("keydown", randomSquare) 
+
+                sbtn.addEventListener("click", () => randomSquare())
+                
+                function randomSquare() {
+                    console.log("s-knapp klikket");
+
+                }
+
+
+        */
+
+
+
     </script>
 </body>
 </html>
