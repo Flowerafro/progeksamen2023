@@ -31,10 +31,11 @@
         canvas.height = 500
         const ctx = canvas.getContext("2d")
 
+        // variabler til addEventListner, som kobles til id i <p>-tagger
         let squareBtn = document.querySelector("#sbutton");
         let circleBtn = document.querySelector("#cbutton");
 
-        //Variabel til firkant
+        //Variabel til firkant - kan sikkert legges inn i funksjon etterhvert ?
         let square = {
             // x: 10; endret til randomNum
             // y: 10; endret til randomNum
@@ -51,11 +52,10 @@
             endAngle: Math.PI * 2 
         }
 
-        //variabel til tellere 
-        let squareCounter = 1; //å starte på 1 da teller den første klikk. Står den på 0, teller den ikke første klikk..
+        //variabel til tellere - de starter på 1 fordi da teller den fra første klikk. Når den stod på 0, telte den ikke første klikk som blir feil..
+        let squareCounter = 1; 
         let circleCounter = 1;
         let totalCounter = 1;
-
 
         //TODO: Storage of multiple element objects (Grade C and above)
         const elements = [
@@ -65,13 +65,13 @@
 
     //TODO: Function to add an element of parameter type 'square' or 'circle':
 
-// Tegne firkant
+// Tegne blåfarget firkant
     const drawSquare = (x, y, fillColor = "#0000FF") => {
         function randomNum(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
         
-        //ctx.clearRect(0, 0, canvas.width, canvas.height); Fjerner Square fra canvas
+        //ctx.clearRect(0, 0, canvas.width, canvas.height); -- Fjernet denne da den gjorde at firkantene ikke ble stående i canvas og tillater nye elementer
         ctx.fillStyle = fillColor;
         ctx.beginPath();
         ctx.fillRect(
@@ -85,46 +85,59 @@
         ctx.stroke();
         ctx.closePath();
 
-        console.log("draw Sqaure", randomNum(8, canvas.width - 8));
+        console.log("S-knappen er klikket");
     }
-
+// registrere klikk for å tegne firkant
     squareBtn.addEventListener("click", function () {
         drawSquare(square.x, square.y, (fillColor = "#0000FF"));
-        document.getElementById("squareCount").innerHTML = squareCounter++
+        document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall klikk på firkantknapp
+        document.getElementById("totalCount").innerHTML = totalCounter++ //når telleren til firkantknappen økes, oppdaterer telleren total basert på antall klikk
     })
 
 
-// Tegne sirkel
+// Tegne gullfarget sirkel
     const drawCircle = (x, y, fillColor = "#FFD700") => {
         function randomNum(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
-        //ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //ctx.clearRect(0, 0, canvas.width, canvas.height); -- Fjernet denne da den gjorde at sirklene ikke ble stående i canvas og tillater nye elementer
         ctx.fillStyle = fillColor;
         ctx.beginPath()
         ctx.arc(
-            randomNum(13, canvas.width - 7),
-            randomNum(13, canvas.height - 7), 
+            randomNum(13, canvas.width - 13),
+            randomNum(13, canvas.height - 13), 
             circle.radius, 
             circle.startAngle, 
             circle.endAngle
-            /* randomNum(7, canvas.width - 7), 
-            randomNum(7, canvas.height - 7),
-            circle.radius,
-            circle.startAngle,
-            circle.endAngle */
         );
         ctx.fillStyle = "#FFD700"
         ctx.fill();
         ctx.closePath();
 
-        console.log("draw Circle", randomNum(8, canvas.width - 8));
+        console.log("C-knappen er klikket");
     }
 
     circleBtn.addEventListener("click", function () {
         drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
-        document.getElementById("circleCount").innerHTML = circleCounter++
+        document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall klikk på sirkelknapp
+        document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til sirkelknappen økes, oppdaterer telleren total basert på antall klikk
     })
+
+    // addEventlistner keydown til S-knapp og C-knapp
+
+    document.addEventListener("keydown", function(event){
+        if(event.key === "s") {
+            drawSquare(square.x, square.y, (fillColor = "#0000FF"));
+            document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall tastetrykk på s-knapp
+            document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til s-knappen økes, oppdaterer telleren total basert på antall tastetrykk
+            }
+        if(event.key === "c") {
+            drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
+            document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall tastetrykk på c-knapp
+            document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til c-knappen økes, oppdaterer telleren total basert på antall tastetrykk
+        }
+    })
+
 
 
             //TODO: Function to add an element of parameter type 'square' or 'circle'
