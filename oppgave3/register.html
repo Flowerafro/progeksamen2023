@@ -73,8 +73,6 @@
         const staff = [
             {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"},
         ]
-        console.log(staff);
-
 
         //Array of available positions
         const positions = ["Director", "Team leader", "Producer", "Engineer", "Designer"]
@@ -83,9 +81,6 @@
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
         /* -----------------  Kode av kandidat:     --------*/ 
-    // Sjekke lengden av array
-        let staffNum = staff.length
-        console.log("There is " + staffNum + " staffmembers registrered"); // consol-log over antall ansatte registrert
 
         // Krav E - del 1) Ansatte listes opp i ansattlisten
         staff.map(staff => document.getElementById("staffList").innerHTML += `
@@ -112,20 +107,33 @@
         const departmentValue = staffDepartment.value;
         const emailValue = staffEmail.value;
 
-        // kode for å legge til verdier inn i array staff objects
-        staff.push(fNameValue, lNameValue, positionValue, departmentValue, emailValue);
+        // kode for å legge til verdier inn i array staff objects. 
+        //Her er det laget en addEventListner til knapp #saveStaff, slik at når det klikkes på den så sendes informasjonen til #staffList
 
-        //vise nylagret ansatt på ansattliste
-        document.getElementById("staffList").innerHTML += `
+        const saveStaffBtn = document.querySelector("#saveStaff");
+
+        saveStaffBtn.addEventListener("click", function () {
+            document.getElementById("staffList").innerHTML += `
         <article>
             <h3>${lNameValue}, ${fNameValue}</h3>
             <p>${positionValue}</p>
             <p>${departmentValue}</p>
             <p> Send email to: <a>${emailValue}</a></p>
-            </article>`
+            </article>`            
+        })
 
+        staff.push({fNameValue, lNameValue, positionValue, departmentValue, emailValue});
+
+        // if-test for å sørge for at informasjonen fra registreringen kun skjer en gang
+
+
+        
+
+        // Console log + Sjekke lengden av array
         console.log(staff);
-
+        let staffNum = staff.length
+        console.log("There is " + staffNum + " staffmembers registrered"); // consol-log over antall ansatte registrert
+        
     </script>
 </body>
 </html>
