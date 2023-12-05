@@ -62,9 +62,10 @@
             <div class="form">
                 <h2>Add department</h2>
                 <p>
-                    <label for="newDepartment">Department</label><input type="text" name="newDepartment" id="newDepartment" placeholder="Department" />
+                    <label for="newDepartment">Department</label>
+                    <input type="text" name="newDepartment" id="newDepartment" placeholder="Department" />
                 </p>
-                <button id="saveDepartment">Save new department</button>
+                <button id="saveDepartment" onclick="newDepartment()">Save new department</button>
             </div>
         </section>
     </main>
@@ -158,6 +159,7 @@
         console.log(staff);
 
         // D-krav: sortere avdeling og stilling 
+        // console.log viser sorteringen
         positions.sort();
         console.log(positions);
 
@@ -165,14 +167,23 @@
         console.log(departments);
 
         // D-krav Nye avdelinger opprettes i HTML-skjemaet
-        const addPosition = document.getElementById("newPosition");
-        const addPositionValue = addPosition.value;
-        positions.push(addPositionValue);
+        // Få tak i input-felt:
+        const addNewDepartment = document.getElementById("newDepartment"); 
+        const addNewDepartmentValue = addNewDepartment.value;
+
+        function newDepartment() {
+            departments.push(addNewDepartmentValue);
+            console.log(departments);
+        }
+        
+
+        // C-krav Nye stillinger opprettes i HTML-skjemaet
+        const addNewPosition = document.getElementById("newPosition");
+        const addNewPositionValue = addNewPosition.value;
 
         function newPosition() {
-            document.getElementById("positionFilter").innerHTML += `
-            <li><button class="Director">${addPositionValue}</button></li>
-            `
+            positions.push(addNewPositionValue);
+            console.log(positions);
         }
 
         
