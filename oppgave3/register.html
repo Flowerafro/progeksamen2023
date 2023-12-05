@@ -144,12 +144,19 @@
             </article>`  
             
             staff.push({fNameValue, lNameValue, positionValue, departmentValue, emailValue});
-        })        
+        })
 
         // Console log + Sjekke lengden av array
         console.log(staff);
         let staffNum = staff.length
         console.log("There is " + staffNum + " staffmembers registrered"); // consol-log over antall ansatte registrert
+
+        // D-krav: sortere avdeling og stilling 
+        positions.sort();
+        console.log(positions);
+        departments.sort();
+        console.log(departments);
+
         
     </script>
 </body>
