@@ -117,6 +117,7 @@
         console.log("C-knappen er klikket");
     }
 
+    // addEventlistner click med funksjon som tegner gul sirkel
     circleBtn.addEventListener("click", function () {
         drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
         document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall klikk på sirkelknapp

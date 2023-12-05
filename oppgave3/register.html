@@ -66,17 +66,34 @@
             </div>
         </section>
     </main>
+
     <script>
         //Array of staff objects
         const staff = [
             {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"},
         ]
+        console.log(staff);
+
 
         //Array of available positions
         const positions = ["Director", "Team leader", "Producer", "Engineer", "Designer"]
 
         //Array of available departments
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
+
+        // Krav E - del 1) Ansatte listes opp i ansattlisten
+        let staffNum = staff.length
+        console.log("There is " + staffNum + " staffmembers registrered"); // consol-log over antall ansatte registrert
+
+        staff.map(staff => document.getElementById("staffList").innerHTML += `
+        <article>
+            <h3> ${staff.lastname}, ${staff.firstname}</h3>
+            <p> ${staff.position}</p>
+            <p> ${staff.department}</p>
+            <a> Send email to: ${staff.email}</a>
+            </article>`)
+        
+        
     </script>
 </body>
 </html>
