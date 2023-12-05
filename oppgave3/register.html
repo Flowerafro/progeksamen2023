@@ -73,6 +73,7 @@
         //Array of staff objects
         const staff = [
             {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"},
+            {firstname: "Armando", lastname: "Murillo", position: "Designer", department: "Production", email: "armando@murillo.net"},
         ]
 
         //Array of available positions
@@ -86,48 +87,49 @@
         // Krav E - del 1) Ansatte listes opp i ansattlisten 
         staff.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard" id="staffmember-0">
-        <h3>Gates, Bill</h3>
+        <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
-        <img src="posicon.png" alt="position: "> Director
-        <img src="depicon.png" alt="department: "> Administration
-        </p><p><a href="mailto:bill@gates.net"><img src="mailicon.png"> Send mail to Bill</a></p>
+            <img src="posicon.png" alt="position: ">${staff.position}
+            <img src="depicon.png" alt="department: ">${staff.department}</p>
+        <p><a href="mailto:${staff.email}">
+        <img src="mailicon.png"> Send mail to ${staff.firstname}</a></p>
         </article>`)
 
         // Kode for å gjøre position-nedtrekksmenyen synlig
         positions.map(position => document.getElementById("position").innerHTML = `
         <select id="position" name="postition">
-        <option value="Director">Director</option>
-        <option value="Team leader">Team leader</option>
-        <option value="Producer">Producer</option>
-        <option value="Engineer">Engineer</option>
-        <option value="Designer">Designer</option>
+        <option>${positions[0]}</option>
+        <option>${positions[1]}</option>
+        <option>${positions[2]}</option>
+        <option>${positions[3]}</option>
+        <option>${positions[4]}</option>
         </select>`)
 
         // kode for å gjøre department-nedtrekksmenyen synlig
         departments.map(department => document.getElementById("department").innerHTML = `
         <select id="department" name="department">
-        <option value="Administration">Administration</option>
-        <option value="Finances">Finances</option>
-        <option value="Human Resources">Human Resources</option>
-        <option value="Production">Production</option>
+        <option>${departments[0]}</option>
+        <option>${departments[1]}</option>
+        <option>${departments[2]}</option>
+        <option>${departments[3]}</option>
         </select>
         `)
 
-        // krav - E del 2) registrere nye ansatte gjennom HTML-skjemaet og nye ansatte lagres i kode
+        // krav - E del 2) registrere nye ansatte gjennom HTML-skjemaet
 
         //variabler for å få tak i input-feltene der informasjon om de ansatte registreres
-        const staffFName = document.getElementById("firstname");
-        const staffLName = document.getElementById("lastname");
-        const staffPosition = document.getElementById("position");
-        const staffDepartment = document.getElementById("department");
-        const staffEmail = document.getElementById("email");
+        const newFirstName = document.getElementById("firstname");
+        const newLastName = document.getElementById("lastname");
+        const newPosition = document.getElementById("position");
+        const newDepartment = document.getElementById("department");
+        const newEmail = document.getElementById("email");
 
         // variabler for å få tak i verdien av input-feltene
-        const fNameValue = staffFName.value;
-        const lNameValue = staffLName.value;
-        const positionValue = staffPosition.value;
-        const departmentValue = staffDepartment.value;
-        const emailValue = staffEmail.value;
+        const fnameValue = newFirstName.value;
+        const lnameValue = newLastName.value;
+        const positionValue = newPosition.value;
+        const departmentValue = newDepartment.value;
+        const emailValue = newEmail.value;
 
         // kode for å legge til verdier inn i array staff objects. 
         //Her er det laget en addEventListner til knapp #saveStaff, slik at når det klikkes på den så sendes informasjonen til #staffList
@@ -136,11 +138,13 @@
 
         saveStaffBtn.addEventListener("click", function () {
             document.getElementById("staffList").innerHTML += `
-        <article>
-            <h3>${lNameValue}, ${fNameValue}</h3>
-            <p>${positionValue}</p>
-            <p>${departmentValue}</p>
-            <a> Send email to: ${emailValue}</a>
+            <article class="membercard" id="staffmember-1">
+            <h3>${lnameValue}, ${fnameValue}</h3>
+            <p class="metainfo">
+                <img src="posicon.png" alt="position: ">${positionValue}
+                <img src="depicon.png" alt="department: ">${departmentValue}</p></p>
+            <p><a href="mailto:${emailValue}">
+                <img src="mailicon.png"> Send mail to ${fnameValue}</a></p>
             </article>`  
             
             staff.push({fNameValue, lNameValue, positionValue, departmentValue, emailValue});
@@ -154,6 +158,7 @@
         // D-krav: sortere avdeling og stilling 
         positions.sort();
         console.log(positions);
+
         departments.sort();
         console.log(departments);
 
