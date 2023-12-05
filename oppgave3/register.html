@@ -46,7 +46,8 @@
                     </select>
                 </p>
                 <p>
-                    <label for="email">Email address</label><input type="email" name="email" id="email" placeholder="you@email.com" /></select>
+                    <label for="email">Email address</label>
+                    <input type="email" name="email" id="email" placeholder="you@email.com" /></select>
                 </p>
                 <button id="saveStaff">Save staff member</button>
             </div>
@@ -81,19 +82,50 @@
         //Array of available departments
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
-        // Krav E - del 1) Ansatte listes opp i ansattlisten
+        /* -----------------  Kode av kandidat:     --------*/ 
+    // Sjekke lengden av array
         let staffNum = staff.length
         console.log("There is " + staffNum + " staffmembers registrered"); // consol-log over antall ansatte registrert
 
+        // Krav E - del 1) Ansatte listes opp i ansattlisten
         staff.map(staff => document.getElementById("staffList").innerHTML += `
         <article>
             <h3> ${staff.lastname}, ${staff.firstname}</h3>
             <p> ${staff.position}</p>
             <p> ${staff.department}</p>
-            <a> Send email to: ${staff.email}</a>
+            <p> Send email to: <a>${staff.email}</a></p>
             </article>`)
-        
-        
+
+        // krav - E del 2) registrere nye ansatte gjennom HTML-skjemaet og nye ansatte lagres i kode
+
+        //variabler for å få tak i input-feltene der informasjon om de ansatte registreres
+        const staffFName = document.getElementById("firstname");
+        const staffLName = document.getElementById("lastname");
+        const staffPosition = document.getElementById("position");
+        const staffDepartment = document.getElementById("department");
+        const staffEmail = document.getElementById("email");
+
+        // variabler for å få tak i verdien av input-feltene
+        const fNameValue = staffFName.value;
+        const lNameValue = staffLName.value;
+        const positionValue = staffPosition.value;
+        const departmentValue = staffDepartment.value;
+        const emailValue = staffEmail.value;
+
+        // kode for å legge til verdier inn i array staff objects
+        staff.push(fNameValue, lNameValue, positionValue, departmentValue, emailValue);
+
+        //vise nylagret ansatt på ansattliste
+        document.getElementById("staffList").innerHTML += `
+        <article>
+            <h3>${lNameValue}, ${fNameValue}</h3>
+            <p>${positionValue}</p>
+            <p>${departmentValue}</p>
+            <p> Send email to: <a>${emailValue}</a></p>
+            </article>`
+
+        console.log(staff);
+
     </script>
 </body>
 </html>
