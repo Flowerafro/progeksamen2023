@@ -84,16 +84,6 @@
 
         /* -----------------  Kode av kandidat:     --------*/ 
 
-        // Krav E - del 1) Ansatte listes opp i ansattlisten 
-        staff.map(staff => document.getElementById("staffList").innerHTML += `
-        <article class="membercard" id="staffmember-0">
-        <h3>${staff.lastname}, ${staff.firstname}</h3>
-        <p class="metainfo">
-            <img src="posicon.png" alt="position: ">${staff.position}
-            <img src="depicon.png" alt="department: ">${staff.department}</p>
-        <p><a href="mailto:${staff.email}">
-        <img src="mailicon.png"> Send mail to ${staff.firstname}</a></p>
-        </article>`)
 
         // Kode for å gjøre position-nedtrekksmenyen synlig
         positions.map(position => document.getElementById("position").innerHTML = `
@@ -115,21 +105,32 @@
         </select>
         `)
 
+        // Krav E - del 1) Ansatte listes opp i ansattlisten 
+        staff.map(staff => document.getElementById("staffList").innerHTML += `
+        <article class="membercard" id="staffmember-0">
+        <h3>${staff.lastname}, ${staff.firstname}</h3>
+        <p class="metainfo">
+            <img src="posicon.png" alt="position: ">${staff.position}
+            <img src="depicon.png" alt="department: ">${staff.department}</p>
+        <p><a href="mailto:${staff.email}">
+        <img src="mailicon.png"> Send mail to ${staff.firstname}</a></p>
+        </article>`)
+
         // krav - E del 2) registrere nye ansatte gjennom HTML-skjemaet
 
         //variabler for å få tak i input-feltene der informasjon om de ansatte registreres
-        const newFirstName = document.getElementById("firstname");
-        const newLastName = document.getElementById("lastname");
-        const newPosition = document.getElementById("position");
-        const newDepartment = document.getElementById("department");
-        const newEmail = document.getElementById("email");
+        const newStaffFName = document.getElementById("firstname");
+        const newStaffLName = document.getElementById("lastname");
+        const newStaffPosition = document.getElementById("position");
+        const newStaffDepartment = document.getElementById("department");
+        const newStaffEmail = document.getElementById("email");
 
         // variabler for å få tak i verdien av input-feltene
-        const fnameValue = newFirstName.value;
-        const lnameValue = newLastName.value;
-        const positionValue = newPosition.value;
-        const departmentValue = newDepartment.value;
-        const emailValue = newEmail.value;
+        const firstNameValue = newStaffFName.value;
+        const lastNameValue = newStaffLName.value;
+        const positionValue = newStaffPosition.value;
+        const departmentValue = newStaffDepartment.value;
+        const emailValue = newStaffEmail.value;
 
         // kode for å legge til verdier inn i array staff objects. 
         //Her er det laget en addEventListner til knapp #saveStaff, slik at når det klikkes på den så sendes informasjonen til #staffList
@@ -139,21 +140,22 @@
         saveStaffBtn.addEventListener("click", function () {
             document.getElementById("staffList").innerHTML += `
             <article class="membercard" id="staffmember-1">
-            <h3>${lnameValue}, ${fnameValue}</h3>
+            <h3>${lastNameValue}, ${firstNameValue}</h3>
             <p class="metainfo">
-                <img src="posicon.png" alt="position: ">${positionValue}
-                <img src="depicon.png" alt="department: ">${departmentValue}</p></p>
+            <img src="posicon.png" alt="position: ">${positionValue}
+            <img src="depicon.png" alt="department: ">${departmentValue}</p></p>
             <p><a href="mailto:${emailValue}">
-                <img src="mailicon.png"> Send mail to ${fnameValue}</a></p>
+            <img src="mailicon.png"> Send mail to ${firstNameValue}</a></p>
             </article>`  
-            
-            staff.push({fNameValue, lNameValue, positionValue, departmentValue, emailValue});
         })
 
+        // kode for å legge til verdier fra input-felt i "add staff-skjema"
+        staff.push({firstNameValue, lastNameValue, positionValue, departmentValue, emailValue});
+
         // Console log + Sjekke lengden av array
-        console.log(staff);
         let staffNum = staff.length
         console.log("There is " + staffNum + " staffmembers registrered"); // consol-log over antall ansatte registrert
+        console.log(staff);
 
         // D-krav: sortere avdeling og stilling 
         positions.sort();
@@ -161,6 +163,17 @@
 
         departments.sort();
         console.log(departments);
+
+        // D-krav Nye avdelinger opprettes i HTML-skjemaet
+        const addPosition = document.getElementById("newPosition");
+        const addPositionValue = addPosition.value;
+        positions.push(addPositionValue);
+
+        function newPosition() {
+            document.getElementById("positionFilter").innerHTML += `
+            <li><button class="Director">${addPositionValue}</button></li>
+            `
+        }
 
         
     </script>
