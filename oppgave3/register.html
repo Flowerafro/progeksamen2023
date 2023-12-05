@@ -54,7 +54,8 @@
             <div class="form">
                 <h2>Add position</h2>
                 <p>
-                    <label for="newPosition">Position</label><input type="text" name="newPosition" id="newPosition" placeholder="Position" />
+                    <label for="newPosition">Position</label>
+                    <input type="text" name="newPosition" id="newPosition" placeholder="Position" />
                 </p>
                 <button id="savePosition" onClick="newPosition()">Save new position</button>
             </div>
@@ -82,14 +83,35 @@
 
         /* -----------------  Kode av kandidat:     --------*/ 
 
-        // Krav E - del 1) Ansatte listes opp i ansattlisten
+        // Krav E - del 1) Ansatte listes opp i ansattlisten 
         staff.map(staff => document.getElementById("staffList").innerHTML += `
-        <article>
-            <h3> ${staff.lastname}, ${staff.firstname}</h3>
-            <p> ${staff.position}</p>
-            <p> ${staff.department}</p>
-            <p> Send email to: <a>${staff.email}</a></p>
-            </article>`)
+        <article class="membercard" id="staffmember-0">
+        <h3>Gates, Bill</h3>
+        <p class="metainfo">
+        <img src="posicon.png" alt="position: "> Director
+        <img src="depicon.png" alt="department: "> Administration
+        </p><p><a href="mailto:bill@gates.net"><img src="mailicon.png"> Send mail to Bill</a></p>
+        </article>`)
+
+        // Kode for å gjøre position-nedtrekksmenyen synlig
+        positions.map(position => document.getElementById("position").innerHTML = `
+        <select id="position" name="postition">
+        <option value="Director">Director</option>
+        <option value="Team leader">Team leader</option>
+        <option value="Producer">Producer</option>
+        <option value="Engineer">Engineer</option>
+        <option value="Designer">Designer</option>
+        </select>`)
+
+        // kode for å gjøre department-nedtrekksmenyen synlig
+        departments.map(department => document.getElementById("department").innerHTML = `
+        <select id="department" name="department">
+        <option value="Administration">Administration</option>
+        <option value="Finances">Finances</option>
+        <option value="Human Resources">Human Resources</option>
+        <option value="Production">Production</option>
+        </select>
+        `)
 
         // krav - E del 2) registrere nye ansatte gjennom HTML-skjemaet og nye ansatte lagres i kode
 
@@ -118,16 +140,11 @@
             <h3>${lNameValue}, ${fNameValue}</h3>
             <p>${positionValue}</p>
             <p>${departmentValue}</p>
-            <p> Send email to: <a>${emailValue}</a></p>
-            </article>`            
-        })
-
-        staff.push({fNameValue, lNameValue, positionValue, departmentValue, emailValue});
-
-        // if-test for å sørge for at informasjonen fra registreringen kun skjer en gang
-
-
-        
+            <a> Send email to: ${emailValue}</a>
+            </article>`  
+            
+            staff.push({fNameValue, lNameValue, positionValue, departmentValue, emailValue});
+        })        
 
         // Console log + Sjekke lengden av array
         console.log(staff);
