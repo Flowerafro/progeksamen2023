@@ -83,12 +83,11 @@
         //Array of available departments
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
-        /* ---------------------- KODE skrevet av kandidat 728 ------------------ */
-    
-
-        /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
+    /* ---------------------- KODE skrevet av kandidat XXX ------------------ */
+    /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
         const positionsSorted = positions.sort(); 
         const departmentsSorted = departments.sort();
+        
 
         // kode for å gjøre position-nedtrekkmeny synlig i html (MÅ ENDRES)
         positionsSorted.map(position => document.getElementById("position").innerHTML = ` 
@@ -181,7 +180,7 @@
         // addEventListner til Save staff member-knapp som starter if-test i addStaffmember
         addStaffBtn.addEventListener("click", addStaffMember)
 
-        /* ----- D-krav Punkt 1) nye avdelinger opprettes i HTML-skjemaet og blir synlig i nedtrekksmeny  -----  */
+        /* ----- D-krav Punkt 2&3) nye avdelinger opprettes i HTML-skjemaet og blir synlig i nedtrekksmeny  -----  */
 
         //variabel for å finne Save new department-knapp
         const addDepartmentBtn = document.getElementById("saveDepartment")
