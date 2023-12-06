@@ -35,7 +35,7 @@
                     <input type="text" name="lastname" id="lastname" placeholder="Lastname" required/></p>
                 <p>
                     <label for="position">Position</label>
-                    <select id="position" name="postition" required>
+                    <select id="position" name="position" required>
                        
                     </select>
                 </p>
@@ -87,12 +87,12 @@
 
         // Kode for å gjøre position-nedtrekksmenyen synlig
         positions.map(position => document.getElementById("position").innerHTML = `
-        <select id="position" name="postition">
-        <option>${positions[0]}</option>
-        <option>${positions[1]}</option>
-        <option>${positions[2]}</option>
-        <option>${positions[3]}</option>
-        <option>${positions[4]}</option>
+        <select id="position" name="position">
+        <option value="D">${positions[0]}</option>
+        <option value="T">${positions[1]}</option>
+        <option value="P">${positions[2]}</option>
+        <option value="E">${positions[3]}</option>
+        <option value="D">${positions[4]}</option>
         </select>`)
 
         // kode for å gjøre department-nedtrekksmenyen synlig
@@ -163,10 +163,14 @@
             })
         }) 
 
-        // D-krav: sortere avdeling og stilling i konsoll
-        // console.log viser sorteringen
+        /* ------------------- Krav D ----------------------------- */
+        // Sortere avdelinger og stillinger i nedtrekksmenyer i HTML-skjema
+        //sortering i konsoll
         positions.sort();
         console.log(positions);
+
+        //sortere i HTML-nedtrekksmeny
+  
 
         departments.sort();
         console.log(departments);
