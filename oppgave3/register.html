@@ -83,8 +83,11 @@
         //Array of available departments
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
-
+        /* ---------------------- KODE skrevet av kandidat 728 ------------------ */
+        // Krav C: Ansattvisning skal sorteres på etternavn
+        const staffSorted = staff.sort();
         // Krav D: Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres
+        // Variabler laget av sort() er lagt inn 
         const positionsSorted = positions.sort(); 
         const departmentsSorted = departments.sort();
     
@@ -108,7 +111,7 @@
         `)
     
         // Krav E Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste 
-        staff.map(staff => document.getElementById("staffList").innerHTML += `
+        staffSorted.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard" id="staffmember-0">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
@@ -154,22 +157,32 @@
         }
 
         // Kode for å tømme inputfelt etter innsending av brukerinfo 
-       const clearInputBtn = document.getElementById("saveStaff");
+       const clearInputBtn = document.getElementById("admin");
         clearInputBtn.addEventListener("click", function clearInput(event) {
             event.preventDefault();
-            const inputCleared = document.querySelectorAll("#firstname, #lastname, #position, #department, #email");
+            const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #newPosition, #newDepartment");
             inputCleared.forEach(input => {
                 input.value = '';
             })
         }) 
 
         // D-krav nye avdelinger opprettes i HTML-skjemaet
-        const addDepartment = document.getElementById("newDepartment");
-        const addDepartmentValue = addDepartment.value;
 
-        // funksjon for å sende verdi fra #newDepartment til array
+        //variabel for å finne Save new department-knapp
+        const addDepartmentBtn = document.getElementById("saveDepartment")
+        //variabel for å koble på addEventlistner til knapp
+        addDepartmentBtn.addEventListener("click", newDepartment)
+
+        // funksjon for å sende verdi fra #newDepartment til array departments og nedtrekksliste
         function newDepartment() {
-            departments.push(addDepartmentValue);
+            // Hente verdi / info som legges inn i input:
+            const addNewDepartment = document.getElementById("newDepartment").value
+            // skrive ut verdi til nedtrekkskjema
+            document.getElementById("department").innerHTML += `<option>${addNewDepartment}</option>`
+            // legge til verdi til array
+            departmentsSorted.push(addNewDepartment);
+            // konsollogg viser at det legges til i array
+            console.log(departments);
         }
 
         // C-krav Nye stillinger opprettes i HTML-skjemaet
@@ -181,13 +194,14 @@
             document.getElementById("positionFilter").innerHTML += 
             `<li><button>${addNewPositionValue}</button></li>`
 
-            positions.push(addNewPositionValue);
+            positionsSorted.push(addNewPositionValue);
             console.log(positions);
         }
 
         //konsoll logg:
-        console.log(departments);
-        console.log(positions);
+        console.log(departmentsSorted);
+        console.log(positionsSorted);
+        console.log(staff);
 
     </script>
 </body>
