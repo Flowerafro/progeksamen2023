@@ -85,7 +85,7 @@
 
         /* ---------------------- KODE skrevet av kandidat 728 ------------------ */
         // Krav C: Ansattvisning skal sorteres på etternavn
-        
+
         // Krav D: Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres
         // Variabler laget av sort() er lagt inn 
         const positionsSorted = positions.sort(); 
@@ -160,7 +160,7 @@
         }
 
         // Kode for å tømme inputfelt etter innsending av brukerinfo 
-       const clearInputBtn = document.getElementById("saveStaff");
+        const clearInputBtn = document.getElementById("saveStaff");
         clearInputBtn.addEventListener("click", function clearInput(event) {
             event.preventDefault();
             const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #position, #department");
@@ -187,23 +187,25 @@
             console.log(departments);
         }
 
-        // C-krav Nye stillinger opprettes i HTML-skjemaet
+        // C-krav: Nye stillinger opprettes i HTML-skjemaet
         // Få tak i input-felt og dens verdi:
-        const addNewPosition = document.getElementById("newPosition");
-        const addNewPositionValue = addNewPosition.value;
-        //funksjon for å sende verdi fra #newPosition til Filter on position
+        const addPosition = document.getElementById("newPosition");
+        const addPositionValue = addPosition.value;
+        //funksjon for å sende verdi fra #newPosition-input til #positionFilter
         function newPosition() {
-            document.getElementById("positionFilter").innerHTML += 
-            `<li><button>${addNewPositionValue}</button></li>`
-
-            positionsSorted.push(addNewPositionValue);
-            console.log(positions);
+           document.getElementById("positionFilter").innerHTML += 
+            `<li><button>${addPositionValue}</button></li>`
+            // sende verdien fra input-felt til array
+            positionsSorted.push(addPositionValue);
+            console.log(positionsSorted); 
         }
 
-        //konsoll logg:
+        //Bare for sjekk opp: konsoll logg av alle knapper
+        console.log(staff);
         console.log(departmentsSorted);
         console.log(positionsSorted);
-        console.log(staff);
+
+       /*          */
 
     </script>
 </body>
