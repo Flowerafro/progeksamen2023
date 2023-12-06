@@ -65,7 +65,7 @@
                     <label for="newDepartment">Department</label>
                     <input type="text" name="newDepartment" id="newDepartment" placeholder="Department" />
                 </p>
-                <button id="saveDepartment" onclick="newDepartment()">Save new department</button>
+                <button id="saveDepartment">Save new department</button>
             </div>
         </section>
     </main>
@@ -83,20 +83,22 @@
         //Array of available departments
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
-        /* -----------------  Kode av kandidat:     --------*/ 
 
-        // Kode for å gjøre position-nedtrekksmenyen synlig
-        positions.map(position => document.getElementById("position").innerHTML = `
+        // Krav D: Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres
+        const positionsSorted = positions.sort(); 
+        const departmentsSorted = departments.sort();
+    
+        positionsSorted.map(position => document.getElementById("position").innerHTML = ` 
         <select id="position" name="position">
-        <option value="D">${positions[0]}</option>
-        <option value="T">${positions[1]}</option>
-        <option value="P">${positions[2]}</option>
-        <option value="E">${positions[3]}</option>
-        <option value="D">${positions[4]}</option>
+        <option>${positions[0]}</option>
+        <option>${positions[1]}</option>
+        <option>${positions[2]}</option>
+        <option>${positions[3]}</option>
+        <option>${positions[4]}</option>
         </select>`)
 
         // kode for å gjøre department-nedtrekksmenyen synlig
-        departments.map(department => document.getElementById("department").innerHTML = `
+        departmentsSorted.map(department => document.getElementById("department").innerHTML = `
         <select id="department" name="department">
         <option>${departments[0]}</option>
         <option>${departments[1]}</option>
@@ -104,10 +106,8 @@
         <option>${departments[3]}</option>
         </select>
         `)
-
-        /* ------------------- Krav E ----------------------------- */
     
-        // Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste 
+        // Krav E Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste 
         staff.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard" id="staffmember-0">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
@@ -163,27 +163,14 @@
             })
         }) 
 
-        /* ------------------- Krav D ----------------------------- */
-        // Sortere avdelinger og stillinger i nedtrekksmenyer i HTML-skjema
-        //sortering i konsoll
-        positions.sort();
-        console.log(positions);
+        // D-krav nye avdelinger opprettes i HTML-skjemaet
+        const addDepartment = document.getElementById("newDepartment");
+        const addDepartmentValue = addDepartment.value;
 
-        //sortere i HTML-nedtrekksmeny
-  
-
-        departments.sort();
-        console.log(departments);
-
-        // D-krav Nye avdelinger opprettes i HTML-skjemaet
-        // Få tak i input-felt og dens verdi:
-        const addNewDepartment = document.getElementById("newDepartment"); 
-        const addNewDepartmentValue = addNewDepartment.value;
+        // funksjon for å sende verdi fra #newDepartment til array
         function newDepartment() {
-            departments.push(addNewDepartmentValue);
-            console.log(departments);
+            departments.push(addDepartmentValue);
         }
-        
 
         // C-krav Nye stillinger opprettes i HTML-skjemaet
         // Få tak i input-felt og dens verdi:
@@ -197,6 +184,10 @@
             positions.push(addNewPositionValue);
             console.log(positions);
         }
+
+        //konsoll logg:
+        console.log(departments);
+        console.log(positions);
 
     </script>
 </body>
