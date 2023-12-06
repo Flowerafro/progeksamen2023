@@ -85,7 +85,7 @@
 
         /* ---------------------- KODE skrevet av kandidat 728 ------------------ */
         // Krav C: Ansattvisning skal sorteres på etternavn
-        const staffSorted = staff.sort();
+        
         // Krav D: Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres
         // Variabler laget av sort() er lagt inn 
         const positionsSorted = positions.sort(); 
@@ -111,7 +111,7 @@
         `)
     
         // Krav E Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste 
-        staffSorted.map(staff => document.getElementById("staffList").innerHTML += `
+        staff.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard" id="staffmember-0">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
@@ -137,6 +137,7 @@
         const position = document.getElementById("position")
         const department = document.getElementById("department")
         const email = document.getElementById("email")
+
 
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
@@ -169,7 +170,6 @@
         }) 
 
         // D-krav nye avdelinger opprettes i HTML-skjemaet
-
         //variabel for å finne Save new department-knapp
         const addDepartmentBtn = document.getElementById("saveDepartment")
         //variabel for å koble på addEventlistner til knapp
