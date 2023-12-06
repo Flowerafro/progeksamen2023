@@ -128,39 +128,41 @@
         // Kode til å lokalisere ansattliste i HTML
         const staffList = document.getElementById("staffList")
 
-        // variabel for å koble på addEventListner til knapp
-        addStaffBtn.addEventListener("click", registerStaff)
+         // koble på addEventListner til knapp
+         addStaffBtn.addEventListener("click", registerStaff)
+
+        // variabler for å finne elementer i input-felt
+        const firstName = document.getElementById("firstname")
+        const lastName = document.getElementById("lastname")
+        const position = document.getElementById("position")
+        const department = document.getElementById("department")
+        const email = document.getElementById("email")
 
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
-            const staffFirstname = document.getElementById("firstname").value
-            const staffLastname = document.getElementById("lastname").value
-            const staffPosition = document.getElementById("position").value
-            const staffDepartment = document.getElementById("department").value
-            const staffEmail = document.getElementById("email").value
-
             // Kode for å sende brukerinfo fra input-felt til HTML
             document.getElementById("staffList").innerHTML += `
+
             <article class="membercard" id="staffmember-1">
-            <h3>${staffLastname}, ${staffFirstname}</h3>
+            <h3>${lastName.value}, ${firstName.value}</h3>
             <p class="metainfo">
-            <img src="posicon.png" alt="position: ">${staffPosition}
-            <img src="depicon.png" alt="department: ">${staffDepartment}</p></p>
-            <p><a href="mailto:${staffEmail}">
-            <img src="mailicon.png"> Send mail to ${staffFirstname}</a></p>
+            <img src="posicon.png" alt="position: ">${position.value}
+            <img src="depicon.png" alt="department: ">${department.value}</p></p>
+            <p><a href="mailto:${email.value}">
+            <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
             </article>`
 
             //oppdatere staff-array (push) brukerinfo til ansattliste
-            staff.push({firstname: staffFirstname, lastname: staffLastname, position: staffPosition, department: staffDepartment, email: staffEmail});
+            staff.push({firstname:firstName.value, lastname: lastName.value, position: position.value, department: department.value, email: email.value});
             // Viser oppdatert ansattliste i konsoll
             console.log(staff);
         }
 
         // Kode for å tømme inputfelt etter innsending av brukerinfo 
-       const clearInputBtn = document.getElementById("admin");
+       const clearInputBtn = document.getElementById("saveStaff");
         clearInputBtn.addEventListener("click", function clearInput(event) {
             event.preventDefault();
-            const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #newPosition, #newDepartment");
+            const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #position, #department");
             inputCleared.forEach(input => {
                 input.value = '';
             })
