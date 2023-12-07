@@ -75,7 +75,6 @@
         const staff = [
             {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"}
         ]
-
         //Array of available positions
         const positions = ["Director", "Team leader", "Producer", "Engineer", "Designer"]
 
@@ -109,16 +108,14 @@
 
         /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */
         staff.map(staff => document.getElementById("staffList").innerHTML += `
-        <article class="membercard" id="staffmember-0">
+        <article class="membercard">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
             <img src="posicon.png" alt="position: ">${staff.position}
             <img src="depicon.png" alt="department: ">${staff.department}
-        </p>
-        <p><a href="mailto:${staff.email}">
+        </p><p><a href="mailto:${staff.email}">
             <img src="mailicon.png"> Send mail to ${staff.firstname}</a>
-        </p>
-        </article>`)
+        </p></article>`)
 
         /* ------------  Krav E Punkt 2) Registrere nye ansatte gjennom HTML-skjema ------------- */
         // variabel for å finne Save Staff Member-knapp
@@ -131,11 +128,12 @@
         const position = document.getElementById("position")
         const department = document.getElementById("department")
         const email = document.getElementById("email")
+        
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
             // Kode for å sende brukerinfo fra input-felt til HTML
             document.getElementById("staffList").innerHTML += 
-            `<article class="membercard" id="staffmember-1">
+            `<article class="membercard">
             <h3>${lastName.value}, ${firstName.value}</h3>
             <p class="metainfo">
             <img src="posicon.png" alt="position: ">${position.value}
@@ -143,7 +141,6 @@
             <p><a href="mailto:${email.value}">
             <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
             </article>`
-
             //oppdatere staff-array (push) brukerinfo til ansattliste
             staff.push({firstname:firstName.value, lastname: lastName.value, position: position.value, department: department.value, email: email.value});
             // Viser oppdatert ansattliste i konsoll
