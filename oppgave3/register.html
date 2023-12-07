@@ -73,8 +73,7 @@
     <script>
         //Array of staff objects
         const staff = [
-            {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"},
-            {firstname: "Armando", lastname: "Murillo", position: "Designer", department: "Production", email: "armando@murillo.net"},
+            {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"}
         ]
 
         //Array of available positions
@@ -87,7 +86,6 @@
     /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
         const positionsSorted = positions.sort(); 
         const departmentsSorted = departments.sort();
-        
 
         // kode for å gjøre position-nedtrekkmeny synlig i html (MÅ ENDRES)
         positionsSorted.map(position => document.getElementById("position").innerHTML = ` 
@@ -108,15 +106,18 @@
         <option>${departments[3]}</option>
         </select>
         `)
+
         /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */
         staff.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard" id="staffmember-0">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
             <img src="posicon.png" alt="position: ">${staff.position}
-            <img src="depicon.png" alt="department: ">${staff.department}</p>
+            <img src="depicon.png" alt="department: ">${staff.department}
+        </p>
         <p><a href="mailto:${staff.email}">
-        <img src="mailicon.png"> Send mail to ${staff.firstname}</a></p>
+            <img src="mailicon.png"> Send mail to ${staff.firstname}</a>
+        </p>
         </article>`)
 
         /* ------------  Krav E Punkt 2) Registrere nye ansatte gjennom HTML-skjema ------------- */
@@ -133,9 +134,8 @@
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
             // Kode for å sende brukerinfo fra input-felt til HTML
-            document.getElementById("staffList").innerHTML += `
-
-            <article class="membercard" id="staffmember-1">
+            document.getElementById("staffList").innerHTML += 
+            `<article class="membercard" id="staffmember-1">
             <h3>${lastName.value}, ${firstName.value}</h3>
             <p class="metainfo">
             <img src="posicon.png" alt="position: ">${position.value}
