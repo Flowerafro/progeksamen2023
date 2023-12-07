@@ -85,6 +85,8 @@
     /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
         const positionsSorted = positions.sort(); 
         const departmentsSorted = departments.sort();
+        // Sortere array etter oppdatert ansatteliste
+        const staffSorted = staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
 
         // kode for å gjøre position-nedtrekkmeny synlig i html (MÅ ENDRES)
         positionsSorted.map(position => document.getElementById("position").innerHTML = ` 
@@ -107,7 +109,7 @@
         `)
 
         /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */
-        staff.map(staff => document.getElementById("staffList").innerHTML += `
+        staffSorted.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
@@ -129,39 +131,23 @@
         const department = document.getElementById("department")
         const email = document.getElementById("email")
 
-        // funksjon som sorterer ansatte 
-        function sortedStaff () {
-             // Sortere staff-array etter lastname
-             const staffSorted = staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
-            // Rygge staffList
-            staffList.innerHTML = "";
-            //Sortere ansatte
-            staffSorted.map(person => {
-                staffList.innerHTML += 
-                `<article class="membercard">
-                <h3>${lastName.value}, ${firstName.value}</h3>
-                <p class="metainfo">
-                    <img src="posicon.png" alt="position: ">${position.value}
-                    <img src="depicon.png" alt="department: ">${department.value}</p></p>
-                <p><a href="mailto:${email.value}">
-                    <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
-            </article>`
-            });
-        }
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
-            // Kode for å sende brukerinfo fra input-felt til HTML
-            document.getElementById("staffList").innerHTML += 
-            `<article class="membercard">
-                <h3>${lastName.value}, ${firstName.value}</h3>
+        const staffInfo =  `<article class="membercard">
+            <h3>${lastName.value}, ${firstName.value}</h3>
                 <p class="metainfo">
                     <img src="posicon.png" alt="position: ">${position.value}
                     <img src="depicon.png" alt="department: ">${department.value}</p></p>
-                <p><a href="mailto:${email.value}">
-                    <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
-            </article>`
-            // Sortere array etter oppdatert ansatteliste
-            staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
+                    <p><a href="mailto:${email.value}">
+                <img src="mailicon.png"> Send mail to ${firstName.value}</a></p></article>`
+            
+        // Sortere ansattinformasjon som legges til
+        let sort = staffInfo.sort((a, b) => a.lastname.localeCompare(b.lastname));
+
+        // Kode for å sende brukerinfo fra input-felt til HTML
+        document.getElementById("staffList").innerHTML += staffInfoSorted
+           
+            
             //oppdatere staff-array (push) brukerinfo til ansattliste
             staff.push({firstname:firstName.value, lastname: lastName.value, position: position.value, department: department.value, email: email.value});
             // Viser oppdatert ansattliste i konsoll
@@ -185,9 +171,9 @@
                 email.value == null 
                 ) 
                 // dersom noen inputfelt er tomme eller har null-verdi skal denne alerten dukke opp
-                {alert("Please fill out all boxes") 
+                {alert("Please fill out all boxes")
             } else {
-                // hvis ingen felt har null eller er tomme, skal registerStaff-funksjonen kjøre
+                // hvis ingen felt har null eller er tomme og deretter skal registerStaff-funksjonen kjøre
                 registerStaff();
                 // Kode for å fjerne verdier fra inputfelt som aktiveres av addStaffMemeber (addEventListner under)
                 const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #position, #department");
