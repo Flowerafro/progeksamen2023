@@ -128,19 +128,40 @@
         const position = document.getElementById("position")
         const department = document.getElementById("department")
         const email = document.getElementById("email")
-        
+
+        // funksjon som sorterer ansatte 
+        function sortedStaff () {
+             // Sortere staff-array etter lastname
+             const staffSorted = staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
+            // Rygge staffList
+            staffList.innerHTML = "";
+            //Sortere ansatte
+            staffSorted.map(person => {
+                staffList.innerHTML += 
+                `<article class="membercard">
+                <h3>${lastName.value}, ${firstName.value}</h3>
+                <p class="metainfo">
+                    <img src="posicon.png" alt="position: ">${position.value}
+                    <img src="depicon.png" alt="department: ">${department.value}</p></p>
+                <p><a href="mailto:${email.value}">
+                    <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
+            </article>`
+            });
+        }
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
             // Kode for å sende brukerinfo fra input-felt til HTML
             document.getElementById("staffList").innerHTML += 
             `<article class="membercard">
-            <h3>${lastName.value}, ${firstName.value}</h3>
-            <p class="metainfo">
-            <img src="posicon.png" alt="position: ">${position.value}
-            <img src="depicon.png" alt="department: ">${department.value}</p></p>
-            <p><a href="mailto:${email.value}">
-            <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
+                <h3>${lastName.value}, ${firstName.value}</h3>
+                <p class="metainfo">
+                    <img src="posicon.png" alt="position: ">${position.value}
+                    <img src="depicon.png" alt="department: ">${department.value}</p></p>
+                <p><a href="mailto:${email.value}">
+                    <img src="mailicon.png"> Send mail to ${firstName.value}</a></p>
             </article>`
+            // Sortere array etter oppdatert ansatteliste
+            staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
             //oppdatere staff-array (push) brukerinfo til ansattliste
             staff.push({firstname:firstName.value, lastname: lastName.value, position: position.value, department: department.value, email: email.value});
             // Viser oppdatert ansattliste i konsoll
