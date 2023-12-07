@@ -133,8 +133,9 @@
 
         // funksjon som sorterer array hver gang man legger til ny ansatte
         function updateStaff() {
-            sortStaff.sort();
+            staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
         }
+
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
         // staffinfo er variabel som inneholder alle verdiene fra inputfelt i Add Staff-seksjonen
@@ -175,8 +176,9 @@
                 // hvis ingen felt har null eller er tomme og deretter skal registerStaff-funksjonen kjøre
     
                 //const sort = staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
-                updateStaff();
+                
                 registerStaff();
+                updateStaff();
 
                 // Kode for å fjerne verdier fra inputfelt som aktiveres av addStaffMemeber (addEventListner under)
                 const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #position, #department");
