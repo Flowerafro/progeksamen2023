@@ -74,8 +74,6 @@
         //Array of staff objects
         const staff = [
             {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"},
-            {firstname: "Bjarte", lastname: "Amundsen", position: "Rockstar", department: "FuckFace", email: "bill@gates.net"},
-            {firstname: "Bjarte", lastname: "Bundsen", position: "Rockstar", department: "FuckFace", email: "bill@gates.net"}
         ]
         //Array of available positions
         const positions = ["Director", "Team leader", "Producer", "Engineer", "Designer"]
@@ -111,7 +109,7 @@
         `)
 
         /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */
-       /* staff.map(staff => document.getElementById("staffList").innerHTML += `
+       staff.map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
         <p class="metainfo">
@@ -119,7 +117,7 @@
             <img src="depicon.png" alt="department: ">${staff.department}
         </p><p><a href="mailto:${staff.email}">
             <img src="mailicon.png"> Send mail to ${staff.firstname}</a>
-        </p></article>`) */
+        </p></article>`) 
 
         /* ------------  Krav E Punkt 2) Registrere nye ansatte gjennom HTML-skjema ------------- */
         // variabel for å finne Save Staff Member-knapp
@@ -133,9 +131,13 @@
         const department = document.getElementById("department")
         const email = document.getElementById("email")
 
+        // funksjon som sorterer array hver gang man legger til ny ansatte
+        function updateStaff() {
+            sortStaff.sort();
+        }
         //funksjon som skal registrere nye ansatte
         function registerStaff () {
-            // staffinfo er variabel som inneholder alle verdiene fra inputfelt i Add Staff-seksjonen
+        // staffinfo er variabel som inneholder alle verdiene fra inputfelt i Add Staff-seksjonen
         const staffInfo =  `<article class="membercard">
             <h3>${lastName.value}, ${firstName.value}</h3>
                 <p class="metainfo">
@@ -149,16 +151,6 @@
         //oppdatere staff-array (push) brukerinfo til ansattliste
         staff.push({firstname:firstName.value, lastname: lastName.value, position: position.value, department: department.value, email: email.value});
         }
-
-        staff.map(staff => document.getElementById("staffList").innerHTML += `
-        <article class="membercard">
-        <h3>${staff.lastname}, ${staff.firstname}</h3>
-        <p class="metainfo">
-            <img src="posicon.png" alt="position: ">${staff.position}
-            <img src="depicon.png" alt="department: ">${staff.department}
-        </p><p><a href="mailto:${staff.email}">
-            <img src="mailicon.png"> Send mail to ${staff.firstname}</a>
-        </p></article>`)
 
         // If-test for å ikke tillate å sende tomt ansattregister 
         // If-testen sjekker om verdiene i inputfeltene er tomme eller har null-verdi
@@ -183,6 +175,7 @@
                 // hvis ingen felt har null eller er tomme og deretter skal registerStaff-funksjonen kjøre
     
                 //const sort = staff.sort((a, b) => a.lastname.localeCompare(b.lastname));
+                updateStaff();
                 registerStaff();
 
                 // Kode for å fjerne verdier fra inputfelt som aktiveres av addStaffMemeber (addEventListner under)
@@ -191,7 +184,6 @@
                 input.value = '';
                 
             })
-            console.log(sortStaff);
         }}
         // addEventListner til Save staff member-knapp som starter if-test i addStaffmember
         addStaffBtn.addEventListener("click", addStaffMember)
