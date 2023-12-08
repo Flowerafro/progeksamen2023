@@ -68,7 +68,7 @@
     console.log(elements);
 
 //TODO: Function to remove random element:
-//funksjon som fjerner tilfeldig element
+//funksjon som fjerner tilfeldig element - ble ikke helt ferdig
 const randomRemove = () => {
     if (elements.length > 0){ // hvis array-elements er større enn "0" / mao om det er en verdi der
         const randomValue = Math.floor(Math.random() * elements.length); // lage en variabel med tilfeldig verdi
@@ -132,7 +132,7 @@ const randomRemove = () => {
         document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall klikk på firkantknapp
         document.getElementById("totalCount").innerHTML = totalCounter++ //når telleren til firkantknappen økes, oppdaterer telleren total basert på antall klikk
 
-        elements.push({type: "square", x:100, y:100})
+        elements.push({type: "square", x:100, y:100}) // ang X og Y- se mappedokument
     })
 
     // addEventlistner click med funksjon som tegner gul sirkel og oppdaterer tellere
@@ -141,7 +141,7 @@ const randomRemove = () => {
         document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall klikk på sirkelknapp
         document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til sirkelknappen økes, oppdaterer telleren total basert på antall klikk
 
-        elements.push({type: "circle", x:100, y:100})
+        elements.push({type: "circle", x:100, y:100}) // ang X og Y- se mappedokument
     })
 
     //addEventListner click med funksjon som fjerner tilfeldig element
@@ -157,19 +157,16 @@ const randomRemove = () => {
             document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall tastetrykk på s-knapp
             document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til s-knappen økes, oppdaterer telleren total basert på antall tastetrykk
 
-            elements.push({type: "square", x:100, y:100}) // sender inn posisjon
+            elements.push({type: "square", x:100, y:100}) // ang X og Y- se mappedokument
             }
         if(event.key === "c") {
             drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
             document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall tastetrykk på c-knapp
             document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til c-knappen økes, oppdaterer telleren total basert på antall tastetrykk
 
-            elements.push({type: "circle", x:100, y:100})
+            elements.push({type: "circle", x:100, y:100})// ang X og Y- se mappedokument
         }
     })
-
-
-
         //Function to draw on canvas:
         function renderDrawings() {
             //Clear the rectangle
