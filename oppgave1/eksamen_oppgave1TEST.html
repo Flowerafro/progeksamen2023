@@ -37,53 +37,27 @@
         <div id="memory">
             <p>Memory (<span id="memory-bank">0</span>)</p>
             <button id="memory-add" onclick="addMemory()">Add</button>
-            <button id="memory-browseback" onclick="prevMemory()">Previous</button> <!-- endret fra disabled til onClick for å utføre krav C -->
+            <button id="memory-browseback" disabled>Previous</button>
             <button id="memory-browseforward" disabled>Next</button>
         </div>
     </article>
 
     <script>
-
-        function display(val) {
-            document.getElementById("calculation").value += val
+        function displey(val) {
+            document.getElementByID("calculatin").value += val
             return val
         }
 
         function solve() {
-            let calculation = document.getElementById("calculation").value
+            let calculation = document.getElementById("calculation").value()
             let result = eval(calculation)
-            document.getElementById("calculation").value = result
+            document.getElementById("calculation").value = results
+            return result
         }
-        /* E-krav forklar solve()-funksjon:
-            Her er det deklarert to variabler: calculation og result.
-            calculation bruker metoden getElementById for å lokalisere id="calculation" og bruker metoden .value for hente ut verdien som er angitt der.
-            result bruker funksjonen eval() til å evaluere variablen over som inneholder streng fra brukerinputs (det som tastes inn på kalkulatoren).
-        */
+
         function clearScreen() {
             document.getElementById("calculation").value = ""
         }
-
-        /* D-krav: lag funksjonalitet som lagrer mattestykket som står i skjermen ved klikk på Add-knapp */
-        let storeMemory = [];
-    
-        function addMemory() {    
-            let calculation = document.getElementById("calculation").value
-
-            if (calculation != "") {
-                storeMemory.push(calculation); 
-                document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
-                console.log(storeMemory);  
-            }
-        }
-        /* C-krav: Lag funksjonalitet som henter ut det siste lagrede mattestykket i memory ved å klikke Previous-knappen, og skriv dette mattestykket til skjermen */
-        let lastMemory = storeMemory.length - 1;
-        
-        function prevMemory() {
-            
-            document.getElementById("calculation").innerHTML = lastMemory;
-            //console.log(lastMemory);  
-        }
-
     </script>
 </body>
 </html>
