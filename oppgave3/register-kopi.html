@@ -81,10 +81,20 @@
         //Array of available departments
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
-    /* ---------------------- KODE skrevet av kandidat XXX ------------------ */
+        
+    // fremvise position Filter
+    const sortPositions = positions.sort((a, b) => a > b) // sorterer positions
+    const showPositions = document.getElementById("positionFilter").innerHTML += `
+    <ul id="positionFilter">
+    <li><button>${sortPositions[0]}</button></li>
+    <li><button>${sortPositions[1]}</button></li>
+    <li><button>${sortPositions[2]}</button></li>
+    <li><button>${sortPositions[3]}</button></li>
+    <li><button>${sortPositions[4]}</button></li></ul>` 
+    
 
     /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
-        // kode for å gjøre position-nedtrekkmeny synlig i html (MÅ ENDRES)
+        // kode for å gjøre position-nedtrekkmeny synlig i html - endret fra en statisk fremvisning likt somm showPositions
     const position = document.getElementById("position");
     const positionFilter = document.getElementById("positionFilter");
 
@@ -101,7 +111,6 @@
           positions.sort();
           position.appendChild(opt); 
          
-       
          
         });
         console.log(positions);
@@ -109,7 +118,7 @@
     addPositions();
 
     
-        // kode for å gjøre department-nedtrekksmenyen synlig i html (MÅ ENDRES)
+        // kode for å gjøre department-nedtrekksmenyen synlig i html - endret fra en statisk fremvisning likt somm showPositions
     const department = document.getElementById("department");
       function addDepartments() {
         departments.forEach(function (item) {
@@ -125,6 +134,7 @@
       addDepartments();
  
         /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */ 
+        // Dette fremviser "Bill Gates" og er statisk da han i videoen alltid ligger under Showing all staff (og allerede finnes i arrayet)
     staff.sort((a, b) => a.lastname.localeCompare(b.lastname)).map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
@@ -143,8 +153,6 @@
         // variabler for å finne elementer i input-felt
         const firstName = document.getElementById("firstname")
         const lastName = document.getElementById("lastname")
-        //const position = document.getElementById("position")
-        //const department = document.getElementById("department")
         const email = document.getElementById("email")
 
         //funksjon som skal registrere nye ansatte 
@@ -207,7 +215,7 @@
         // Variabel for å finne verdi i inputfelt
         let departmentInput = document.getElementById("newDepartment")
 
-        //funksjon som skal legge til ny avdeling - LA STÅ 
+        //funksjon som skal legge til ny avdeling -
         function newDepartment() {    
             // tømme dropdown-meny
             departmentList.innerHTML = "";
@@ -243,8 +251,6 @@
 
 
         function newPosition() {
-
-            document.getElementById("positionFilter").innerHTML += `<li><button>${positions}</button></li>`
  
             // tømme dropdown-meny
             positionList.innerHTML = "";
@@ -257,6 +263,8 @@
                 positions.sort()
                 position.appendChild(el);
             })
+            // legge til ny stilling i positionFilter
+            document.getElementById("positionFilter").innerHTML += `<li><button>${positionInput.value}</button></li>`
            
             // rydder vekk array for å få plass til oppdatert array
             positionInput.value = "";
