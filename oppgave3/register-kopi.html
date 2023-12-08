@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff register</title>
+    <title>TESTERStaff register</title>
     <link href="style.css" rel="stylesheet" media="screen" />
 </head>
 <body>
@@ -74,7 +74,6 @@
         //Array of staff objects
         const staff = [
             {firstname: "Bill", lastname: "Gates", position: "Director", department: "Administration", email: "bill@gates.net"},
-            {firstname: "Bob", lastname: "Butt", position: "Director", department: "Administration", email: "bill@gates.net"},
         ]
         //Array of available positions
         const positions = ["Director", "Team leader", "Producer", "Engineer", "Designer"]
@@ -83,13 +82,10 @@
         const departments = ["Administration", "Human Resources", "Production", "Finances"]
 
     /* ---------------------- KODE skrevet av kandidat XXX ------------------ */
-    /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
-  
-      
-      /*   const sortStaff = staff.sort((a, b) => a.lastname.localeCompare(b.lastname)); */
 
+    /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
         // kode for å gjøre position-nedtrekkmeny synlig i html (MÅ ENDRES)
-        positions.sort().map(position => document.getElementById("position").innerHTML = ` 
+        positions.sort().map(showPosition => document.getElementById("position").innerHTML = ` 
         <select id="position" name="position">
         <option>${positions[0]}</option>
         <option>${positions[1]}</option>
@@ -99,18 +95,12 @@
         </select>`)
 
         // kode for å gjøre department-nedtrekksmenyen synlig i html (MÅ ENDRES)
-        departments.sort().map(department => document.getElementById("department").innerHTML = `
+   departments.sort().map(showDepartment => document.getElementById("department").innerHTML = `
         <select id="department" name="department">
-        <option>${departments[0]}</option>
-        <option>${departments[1]}</option>
-        <option>${departments[2]}</option>
-        <option>${departments[3]}</option>
         </select>
         `)
-
-        /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */ 
-        
  
+        /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */ 
     staff.sort((a, b) => a.lastname.localeCompare(b.lastname)).map(staff => document.getElementById("staffList").innerHTML += `
         <article class="membercard">
         <h3>${staff.lastname}, ${staff.firstname}</h3>
@@ -121,74 +111,140 @@
             <img src="mailicon.png"> Send mail to ${staff.firstname}</a>
         </p></article>`) 
 
-
         /* ------------  Krav E Punkt 2) Registrere nye ansatte gjennom HTML-skjema ------------- */
+        // variabel for å finne Save Staff Member-knapp
+        const addStaffBtn = document.getElementById("saveStaff")
+        // Kode til å lokalisere ansattliste i HTML
+        const staffList = document.getElementById("staffList")
+        // variabler for å finne elementer i input-felt
+        const firstName = document.getElementById("firstname")
+        const lastName = document.getElementById("lastname")
+        const position = document.getElementById("position")
+        const department = document.getElementById("department")
+        const email = document.getElementById("email")
 
-        const saveStaffBtn = document.getElementById("saveStaff")
-        saveStaffBtn.addEventListener("click", addStaff)
-
-        function addStaff() {
-            const firstName = document.getElementById("firstname")
-            const lastName = document.getElementById("lastname")
-            const position = document.getElementById("position")
-            const department = document.getElementById("department")
-            const email = document.getElementById("email")
-
+        //funksjon som skal registrere nye ansatte 
+        function registerStaff () {        
+            // rydder vekk staffList
+            document.getElementById("staffList").innerHTML = "";
+            // sender informasjon fra input-felt til array i koden
             staff.push({firstname:firstName.value, lastname: lastName.value, position: position.value, department: department.value, email: email.value});
+            //  Sortere etter etternavn / lastname før mapper ut arrayet (sender til staffList) 
+        staff.sort((a, b) => a.lastname.localeCompare(b.lastname)).map(staff => document.getElementById("staffList").innerHTML += `
+        <article class="membercard">
+        <h3>${staff.lastname}, ${staff.firstname}</h3>
+        <p class="metainfo">
+            <img src="posicon.png" alt="position: ">${staff.position}
+            <img src="depicon.png" alt="department: ">${staff.department}
+        </p><p><a href="mailto:${staff.email}">
+            <img src="mailicon.png"> Send mail to ${staff.firstname}</a>
+        </p></article>`) 
 
-            staff.innerHTML += (`<li>`)
+        console.log(staff);
         }
-       
-        // If-test for å ikke tillate å sende tomt ansattregister 
+
+        /* ----- Mål: Ikke kunne registere nye ansatte dersom noen av feltene fornavn, etternavn eller epost er tomme ---- */
         // If-testen sjekker om verdiene i inputfeltene er tomme eller har null-verdi
         const addStaffMember = (e) => {
             e.preventDefault();
             if (
-                firstName === "" || 
-                firstName == null ||
-                lastName === "" ||
-                lastName == null || 
-                position === "" ||
-                position == null ||
-                department === "" ||
-                department == null || 
-                email === "" ||
-                email == null 
-                ) 
-                // dersom noen inputfelt er tomme eller har null-verdi skal denne alerten dukke opp
-                {
+                firstName.value === "" || 
+                firstName.value == null ||
+                lastName.value === "" ||
+                lastName.value == null || 
+                position.value === "" ||
+                position.value == null ||
+                department.value === "" ||
+                department.value == null || 
+                email.value === "" ||
+                email.value == null 
+                ) {
+                    // dersom noen inputfelt er tomme eller har null-verdi skal denne alerten dukke opp
                     alert("Please fill out all boxes")
             } else {
-                // hvis ingen felt har null eller er tomme og deretter skal registerStaff-funksjonen kjøre
+                // hvis ingen felt har null eller er tomme, skal registerStaff-funksjonen kjøre
                 registerStaff();
-                // Kode for å fjerne verdier fra inputfelt som aktiveres av addStaffMemeber (addEventListner under)
+                // Kode som rydder ut fra inputfeltene, som aktiveres av addEventListner under 
                 const inputCleared = document.querySelectorAll("#firstname, #lastname, #email, #position, #department");
                 inputCleared.forEach(input => {
                 input.value = "";
-                
             })
         }}
-        // addEventListner til Save staff member-knapp som starter if-test i addStaffmember
+        // addEventListner til Save staff member-knapp som starter if-test i addStaffmember og deretter registerStaff
         addStaffBtn.addEventListener("click", addStaffMember)
+
 
         /* ----- D-krav Punkt 2&3) nye avdelinger opprettes i HTML-skjemaet og blir synlig i nedtrekksmeny  -----  */
 
         //variabel for å finne Save new department-knapp
         const addDepartmentBtn = document.getElementById("saveDepartment")
-        // funksjon for å sende verdi fra #newDepartment til array departments og nedtrekksliste
-        function newDepartment() {
-            // Hente verdi / info som legges inn i input:
-            const addNewDepartment = document.getElementById("newDepartment").value
-            // skrive ut verdi til nedtrekkskjema og gjøre den synlig
-            document.getElementById("department").innerHTML += `<option>${addNewDepartment}</option>`
-            // legge til verdi til array
-            departmentsSorted.push(addNewDepartment);
+        // Kode for å lokalisere departmen-liste i HTML
+        const departmentList = document.getElementById("department")
+        // Variabel for å finne element i inputfelt
+        let departmentInput = document.getElementById("newDepartment")
+
+        //funksjon som skal legge til ny avdeling
+        function newDepartment() {    
+            // tømme dropdown-meny
+            departmentList.value = "";
+            // sender info fra inpultfelt
+            departments.push(departmentInput.value);
+            //sortere array
+            const sortedDepartment = departments.sort((a, b) => a > b)
+            // sende verdier til HTML
+            for(var i = 0; i < departments.length; i++) {
+            var opt = departments[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            department.appendChild(el);
+}
+
+       /*      departments.forEach((dept) => {
+                let o = document.createElement("option");
+                o.text = dept.name;
+                o.value = dept.goals;
+                department.appendChild(o);
+            }) */
+            
+         /*    for(let i = 0; i < departments.length; i++) {
+                let element = document.createElement("option");
+                element.textContent = departmentInput.value;
+                element.value = departmentInput.value;
+                department.appendChild(element);
+            } */
+
+        /*     for(let i = 4; i < departments.length; i++) {
+
+                let dept = departments[i];
+                let element = document.createElement("option");
+                element.textContent = departmentInput.value;
+                element.value = dept;
+                department.appendChild(element);
+           
+            /*
+            for(let addDept = 0; addDept <= 10; addDept++) {
+                departments += `<option>${departmentInput.value}</option>`
+            }
+            document.getElementById("department").innerHTML = departments */
+      /*   document.getElementById("department").innerHTML = `
+        <select id="department" name="department">
+        <option>${departments[0]}</option>
+        <option>${departments[1]}</option>
+        <option>${departments[2]}</option>
+        <option>${departments[3]}</option>
+        <option>${departments[4]}</option>
+        </select>`; */
+            // rydder vekk array for å få plass til oppdatert array
+            departmentInput.value = "";
             // konsollogg viser at det legges til i array
-      
-        }
+            console.log(departments);
+        
+    }
         //addEventlistner til Save New Department-knapp
         addDepartmentBtn.addEventListener("click", newDepartment)
 
+       
         /* --------------C-krav: Nye stillinger opprettes i HTML-skjemaet-------------- */
 
         //variabel for å finne Save New position-knapp
@@ -202,17 +258,14 @@
             //Skrive ut verdi til Filter on position (over ansattliste)
             document.getElementById("positionFilter").innerHTML += `<li><button>${addNewPosition}</button></li>`
             //legge til verdi til array
-            positionsSorted.push(addNewPosition);
+            positions.push(addNewPosition);
             //konsollogg viser at det legges til i array
-           
+            console.log(positions);
         }
         //addEventlistner til Save New Position-knapp
         addPositionBtn.addEventListener("click", newPosition)
 
-        //Bare for sjekk opp: konsoll logg av alle knapper
-        //console.log(sortStaff);
- console.log(staff);
-
+        console.log(staff);
     </script>
 </body>
 </html>
