@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TESTERStaff register</title>
+    <title>Staff register - levering</title>
     <link href="style.css" rel="stylesheet" media="screen" />
 </head>
 <body>
@@ -85,20 +85,44 @@
 
     /* ------------  Krav D: Punkt 1) Stillinger og avdelinger i nedtrekksmeny i HTMl sorteres ------------- */
         // kode for å gjøre position-nedtrekkmeny synlig i html (MÅ ENDRES)
-        positions.sort().map(showPosition => document.getElementById("position").innerHTML = ` 
-        <select id="position" name="position">
-        <option>${positions[0]}</option>
-        <option>${positions[1]}</option>
-        <option>${positions[2]}</option>
-        <option>${positions[3]}</option>
-        <option>${positions[4]}</option>
-        </select>`)
+    const position = document.getElementById("position");
+    const positionFilter = document.getElementById("positionFilter");
 
+      function addPositions() {
+        positions.forEach(function (item) {
+
+          let opt = document.createElement("option");
+         
+       
+          opt.text = item;
+          opt.value = item;
+
+       
+          positions.sort();
+          position.appendChild(opt); 
+         
+       
+         
+        });
+        console.log(positions);
+    }
+    addPositions();
+
+    
         // kode for å gjøre department-nedtrekksmenyen synlig i html (MÅ ENDRES)
-   departments.sort().map(showDepartment => document.getElementById("department").innerHTML = `
-        <select id="department" name="department">
-        </select>
-        `)
+    const department = document.getElementById("department");
+      function addDepartments() {
+        departments.forEach(function (item) {
+          let el = document.createElement("option");
+          el.text = item;
+          el.value = item;
+          departments.sort();
+          department.appendChild(el);
+        });
+
+        console.log(departments);
+      }
+      addDepartments();
  
         /* ------------  Krav E: Punkt 1) Kode til å liste opp ansatte (staff.array) i ansattliste  ------------- */ 
     staff.sort((a, b) => a.lastname.localeCompare(b.lastname)).map(staff => document.getElementById("staffList").innerHTML += `
@@ -119,8 +143,8 @@
         // variabler for å finne elementer i input-felt
         const firstName = document.getElementById("firstname")
         const lastName = document.getElementById("lastname")
-        const position = document.getElementById("position")
-        const department = document.getElementById("department")
+        //const position = document.getElementById("position")
+        //const department = document.getElementById("department")
         const email = document.getElementById("email")
 
         //funksjon som skal registrere nye ansatte 
@@ -180,86 +204,63 @@
         const addDepartmentBtn = document.getElementById("saveDepartment")
         // Kode for å lokalisere departmen-liste i HTML
         const departmentList = document.getElementById("department")
-        // Variabel for å finne element i inputfelt
+        // Variabel for å finne verdi i inputfelt
         let departmentInput = document.getElementById("newDepartment")
 
-        //funksjon som skal legge til ny avdeling
+        //funksjon som skal legge til ny avdeling - LA STÅ 
         function newDepartment() {    
             // tømme dropdown-meny
-            departmentList.value = "";
+            departmentList.innerHTML = "";
             // sender info fra inpultfelt
             departments.push(departmentInput.value);
-            //sortere array
-            const sortedDepartment = departments.sort((a, b) => a > b)
-            // sende verdier til HTML
-            for(var i = 0; i < departments.length; i++) {
-            var opt = departments[i];
-            var el = document.createElement("option");
-            el.textContent = opt;
-            el.value = opt;
-            department.appendChild(el);
-            }
-
-       /*      departments.forEach((dept) => {
-                let o = document.createElement("option");
-                o.text = dept.name;
-                o.value = dept.goals;
-                department.appendChild(o);
-            }) */
-            
-         /*    for(let i = 0; i < departments.length; i++) {
-                let element = document.createElement("option");
-                element.textContent = departmentInput.value;
-                element.value = departmentInput.value;
-                department.appendChild(element);
-            } */
-
-        /*     for(let i = 4; i < departments.length; i++) {
-
-                let dept = departments[i];
-                let element = document.createElement("option");
-                element.textContent = departmentInput.value;
-                element.value = dept;
-                department.appendChild(element);
+            departments.forEach(function (item) {
+                var el = document.createElement("option");
+                el.textContent = item;
+                el.value = item;
+                departments.sort()
+                department.appendChild(el);
+            })
            
-            /*
-            for(let addDept = 0; addDept <= 10; addDept++) {
-                departments += `<option>${departmentInput.value}</option>`
-            }
-            document.getElementById("department").innerHTML = departments */
-      /*   document.getElementById("department").innerHTML = `
-        <select id="department" name="department">
-        <option>${departments[0]}</option>
-        <option>${departments[1]}</option>
-        <option>${departments[2]}</option>
-        <option>${departments[3]}</option>
-        <option>${departments[4]}</option>
-        </select>`; */
             // rydder vekk array for å få plass til oppdatert array
             departmentInput.value = "";
             // konsollogg viser at det legges til i array
             console.log(departments);
-        
     }
         //addEventlistner til Save New Department-knapp
         addDepartmentBtn.addEventListener("click", newDepartment)
-
        
-        /* --------------C-krav: Nye stillinger opprettes i HTML-skjemaet-------------- */
 
+        /* --------------C-krav: Nye stillinger opprettes i HTML-skjemaet-------------- */
+        
+        
         //variabel for å finne Save New position-knapp
         const addPositionBtn = document.getElementById("savePosition")
+        // Kode for å lokalisere departmen-liste i HTML
+        const positionList = document.getElementById("position")
+        // variabel for å finne verdi i inputfekt
+        const positionInput = document.getElementById("newPosition")
         //funksjon for å sende verdi fra #newPosition til array positions, Filter on Positions og nedtrekksliste
+
+
         function newPosition() {
-            //Hente verdi / info som legges inn i input:
-            const addNewPosition = document.getElementById("newPosition").value
-            //Skrive ut verdi til nedtrekkskjema og gjøre den synlig
-            document.getElementById("position").innerHTML += `<option>${addNewPosition}</option>`
-            //Skrive ut verdi til Filter on position (over ansattliste)
-            document.getElementById("positionFilter").innerHTML += `<li><button>${addNewPosition}</button></li>`
-            //legge til verdi til array
-            positions.push(addNewPosition);
-            //konsollogg viser at det legges til i array
+
+            document.getElementById("positionFilter").innerHTML += `<li><button>${positions}</button></li>`
+ 
+            // tømme dropdown-meny
+            positionList.innerHTML = "";
+            // sender info fra inpultfelt
+            positions.push(positionInput.value);
+            positions.forEach(function (item) {
+                var el = document.createElement("option");
+                el.textContent = item;
+                el.value = item;
+                positions.sort()
+                position.appendChild(el);
+            })
+           
+            // rydder vekk array for å få plass til oppdatert array
+            positionInput.value = "";
+            // konsollogg viser at det legges til i array
             console.log(positions);
         }
         //addEventlistner til Save New Position-knapp
