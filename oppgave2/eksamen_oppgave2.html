@@ -34,6 +34,7 @@
         // variabler til addEventListner, som kobles til id i <p>-tagger
         let squareBtn = document.querySelector("#sbutton");
         let circleBtn = document.querySelector("#cbutton");
+        let randomBtn = document.querySelector("#rbutton");
 
         //Variabel til firkant som skal tegnes med museklikk eller tast "S"
         let square = {
@@ -64,6 +65,21 @@
         ]
 
     //TODO: Function to add an element of parameter type 'square' or 'circle':
+    console.log(elements);
+
+//TODO: Function to remove random element:
+//funksjon som fjerner tilfeldig element
+const randomRemove = () => {
+    if (elements.length > 0){ // hvis array-elements er større enn "0" / mao om det er en verdi der
+        const randomValue = Math.floor(Math.random() * elements.length); // lage en variabel med tilfeldig verdi
+        elements.splice(randomValue, 10); //la inn 10 bare for å ha et tall å jobbe med
+
+        // denne funksjonen fjerner arrays, men ikke hva selve elementene - må legge til her
+
+        console.log("Random remove er klikket");
+        console.log(elements);
+    }
+}
 
 //  Funksjonen som tegner blåfarget firkant
 // funksjonen randomNum er randomisering som gjør at firkanten dukker opp på tilfeldige steder i canvas
@@ -83,8 +99,8 @@
         ctx.fill();
         ctx.stroke();
         ctx.closePath();
-
-        //console.log("S-knappen er klikket"); // sjekker om funksjonen kjører
+        
+        console.log("S-knappen er klikket"); // sjekker om funksjonen kjører
     }
 
 // Funksjonen som skal tegne gullfarget sirkel
@@ -107,7 +123,7 @@
         ctx.fill();
         ctx.closePath();
 
-        // console.log("C-knappen er klikket"); sjekker om funksjonen kjører
+        console.log("C-knappen er klikket"); //sjekker om funksjonen kjører
     }
     //TODO: EventListeners to track user input + TODO: Count the element types and total and print to interface
     // addEventListner click med funksjon som tegner blå firkant og oppdaterer tellere
@@ -115,6 +131,8 @@
         drawSquare(square.x, square.y, (fillColor = "#0000FF"));
         document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall klikk på firkantknapp
         document.getElementById("totalCount").innerHTML = totalCounter++ //når telleren til firkantknappen økes, oppdaterer telleren total basert på antall klikk
+
+        elements.push({type: "square", x:100, y:100})
     })
 
     // addEventlistner click med funksjon som tegner gul sirkel og oppdaterer tellere
@@ -122,6 +140,14 @@
         drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
         document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall klikk på sirkelknapp
         document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til sirkelknappen økes, oppdaterer telleren total basert på antall klikk
+
+        elements.push({type: "circle", x:100, y:100})
+    })
+
+    //addEventListner click med funksjon som fjerner tilfeldig element
+    randomBtn.addEventListener("click", function () {
+            randomRemove();
+            document.getElementById("totalCount").innerHTML = totalCounter-- 
     })
 
     // addEventlistner keydown til S-knapp og C-knapp og oppdaterer tellere
@@ -130,26 +156,17 @@
             drawSquare(square.x, square.y, (fillColor = "#0000FF"));
             document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall tastetrykk på s-knapp
             document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til s-knappen økes, oppdaterer telleren total basert på antall tastetrykk
+
+            elements.push({type: "square", x:100, y:100}) // sender inn posisjon
             }
         if(event.key === "c") {
             drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
             document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall tastetrykk på c-knapp
             document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til c-knappen økes, oppdaterer telleren total basert på antall tastetrykk
+
+            elements.push({type: "circle", x:100, y:100})
         }
     })
-
-
-        //TODO: Function to remove random element:
-    
-    const removeElement = 
-
-    function randomNum(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-
-        console.log(drawCircle);
-        console.log(drawSquare);
-        console.log(elements);
 
 
 
@@ -167,7 +184,7 @@
             requestAnimationFrame(renderDrawings)
         }
         //Start drawing
-        //renderDrawings() kommentert ut for å slippe at den løper i bakgrunnen som en maniac
+        renderDrawings()
     </script>
 </body>
 </html>
