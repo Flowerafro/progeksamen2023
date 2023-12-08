@@ -38,7 +38,7 @@
             <p>Memory (<span id="memory-bank">0</span>)</p>
             <button id="memory-add" onclick="addMemory()">Add</button>
             <button id="memory-browseback" onclick="prevMemory()">Previous</button> <!-- endret fra disabled til onClick for å utføre krav C -->
-            <button id="memory-browseforward" disabled>Next</button>
+            <button id="memory-browseforward" onclick="nextMemory()">Next</button>
         </div>
     </article>
 
@@ -65,28 +65,27 @@
 
         /* D-krav: lag funksjonalitet som lagrer mattestykket som står i skjermen ved klikk på Add-knapp */
         let storeMemory = [];
-    
+
+        // funksjonen henter verdien i "vinduet" og dersom vinduet ikke er tom, så sender den innholdet i vinduet til storeMemoy og øker telleren
         function addMemory() {    
             let calculation = document.getElementById("calculation").value
 
             if (calculation != "") {
                 storeMemory.push(calculation); 
-                document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory */
-                console.log(storeMemory);  
+                document.getElementById("memory-bank").innerHTML ++ /* visualisering av antall memory som øker ved antall Add */
+                console.log(storeMemory);  // viser hver Add til minnebanken som vises i konsoll
             }
         }
 
         //Kav C del 1) variabel til fremvising av sistemattestykke
-        
        /*  let lastMemory = storeMemory[storeMemory.length - 1];
         function prevMemory() {
             document.getElementById("calculation").value = lastMemory;
         } */
  
           // Krav B del 1) Lag funksjonalitet som henter ut eldre mattestykker fra memory ved klikking av previous-knapp
-         let memoryIndex = storeMemory.length - 1;
+        let memoryIndex = storeMemory.length - 1;
         function prevMemory() {
-          
             // Hvis array er større enn 0 
             if (storeMemory.length > 0) {
                 // vinduet på kalkulatoren skal vise siste gjeldende "verdi" i array (som deretter skal gå bakover)
@@ -95,17 +94,31 @@
                 // kode som oppdaterer indexen(siste visning) og remainder % henter gjenværende 
                 memoryIndex = (memoryIndex - 1 + storeMemory.length) % storeMemory.length;
 
-                //sjekke om vi har gått gjennom hele array fra bakerst til start
+                //sjekke om man har gått gjennom hele array fra bakerst til start og sørger for at Previous-knapp blir utilgjengelig når man ankommer start i array
                if (memoryIndex === storeMemory.length - 1){
-                document.getElementById("memory-browseback").disabled = true;
+                document.getElementById("memory-browseback").disabled = true; 
                }
                else {
                 document.getElementById("memory-browseback").disabled = false;
                }
             } 
-            console.log(storeMemory);
+            console.log(storeMemory); // skriver ut lageret i memory til konsoll når Previous-knappen klikkes
         } 
-        console.log(storeMemory);
+        console.log(storeMemory); // skriver ut lageret i memory til konsoll - vil være tom når minnebanken ikke er brukt
+
+        /* Krav A - ble fremover i mattestykkene i memory*/
+        function nextMemory() {
+            // ikke rukket å begynne på
+        }
+
+        /* 
+        Krav E - bruk konsoll og løs fem feil:
+        Linje 46: Displey → Display
+        Linje 47: Calculatin → Calculation
+        Linje 52: getElementByID → getElementById
+        Linje 52: .value() → .value
+        Linje 54: results → result 
+        */
     </script>
 </body>
 </html>
