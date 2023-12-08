@@ -75,15 +75,37 @@
                 console.log(storeMemory);  
             }
         }
-        /* C-krav: Lag funksjonalitet som henter ut det siste lagrede mattestykket i memory ved å klikke Previous-knappen, og skriv dette mattestykket til skjermen */
-        let lastMemory = storeMemory.length - 1;
-        
-        function prevMemory() {
-            
-            document.getElementById("calculation").innerHTML = lastMemory;
-            //console.log(lastMemory);  
-        }
 
+        //Kav C del 1) variabel til fremvising av sistemattestykke
+        
+       /*  let lastMemory = storeMemory[storeMemory.length - 1];
+        function prevMemory() {
+            document.getElementById("calculation").value = lastMemory;
+        } */
+ 
+          // Krav B del 1) Lag funksjonalitet som henter ut eldre mattestykker fra memory ved klikking av previous-knapp
+         let memoryIndex = storeMemory.length - 1;
+        function prevMemory() {
+          
+            // Hvis array er større enn 0 
+            if (storeMemory.length > 0) {
+                // vinduet på kalkulatoren skal vise siste gjeldende "verdi" i array (som deretter skal gå bakover)
+                document.getElementById("calculation").value = storeMemory[memoryIndex];
+
+                // kode som oppdaterer indexen(siste visning) og remainder % henter gjenværende 
+                memoryIndex = (memoryIndex - 1 + storeMemory.length) % storeMemory.length;
+
+                //sjekke om vi har gått gjennom hele array fra bakerst til start
+               if (memoryIndex === storeMemory.length - 1){
+                document.getElementById("memory-browseback").disabled = true;
+               }
+               else {
+                document.getElementById("memory-browseback").disabled = false;
+               }
+            } 
+            console.log(storeMemory);
+        } 
+        console.log(storeMemory);
     </script>
 </body>
 </html>
