@@ -35,7 +35,7 @@
         let squareBtn = document.querySelector("#sbutton");
         let circleBtn = document.querySelector("#cbutton");
 
-        //Variabel til firkant - kan sikkert legges inn i funksjon etterhvert ?
+        //Variabel til firkant som skal tegnes med museklikk eller tast "S"
         let square = {
             // x: 10; endret til randomNum
             // y: 10; endret til randomNum
@@ -43,7 +43,7 @@
             height: 8
         }
         
-        //Variabel til sirkel
+        //Variabel til sirkel som skal tegnes med museklikk eller tast "C"
         let circle = {
             //x: 300, endret til randomNum
             //y: 300, endret til randomNum
@@ -65,37 +65,30 @@
 
     //TODO: Function to add an element of parameter type 'square' or 'circle':
 
-// Tegne blåfarget firkant
+//  Funksjonen som tegner blåfarget firkant
+// funksjonen randomNum er randomisering som gjør at firkanten dukker opp på tilfeldige steder i canvas
     const drawSquare = (x, y, fillColor = "#0000FF") => {
         function randomNum(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
-        
         //ctx.clearRect(0, 0, canvas.width, canvas.height); -- Fjernet denne da den gjorde at firkantene ikke ble stående i canvas og tillater nye elementer
         ctx.fillStyle = fillColor;
         ctx.beginPath();
         ctx.fillRect(
-            randomNum(0, canvas.width - 8), 
+            randomNum(0, canvas.width - 8), // lagt inn -8 da det er ønskelig at firkanten ikke skal gå utenfor canvas
             randomNum(0, canvas.height - 8),
             square.width,
             square.height
         );
-    
         ctx.fill();
         ctx.stroke();
         ctx.closePath();
 
-        console.log("S-knappen er klikket");
+        //console.log("S-knappen er klikket"); // sjekker om funksjonen kjører
     }
-// registrere klikk for å tegne firkant
-    squareBtn.addEventListener("click", function () {
-        drawSquare(square.x, square.y, (fillColor = "#0000FF"));
-        document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall klikk på firkantknapp
-        document.getElementById("totalCount").innerHTML = totalCounter++ //når telleren til firkantknappen økes, oppdaterer telleren total basert på antall klikk
-    })
 
-
-// Tegne gullfarget sirkel
+// Funksjonen som skal tegne gullfarget sirkel
+// funksjonen randomNum er randomisering som gjør at sirkelen dukker opp på tilfeldige steder i canvas
     const drawCircle = (x, y, fillColor = "#FFD700") => {
         function randomNum(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
@@ -104,7 +97,7 @@
         ctx.fillStyle = fillColor;
         ctx.beginPath()
         ctx.arc(
-            randomNum(13, canvas.width - 13),
+            randomNum(13, canvas.width - 13), // lagt inn -13 da det er ønskelig at sirkelen ikke skal gå utenfor canvas
             randomNum(13, canvas.height - 13), 
             circle.radius, 
             circle.startAngle, 
@@ -114,18 +107,24 @@
         ctx.fill();
         ctx.closePath();
 
-        console.log("C-knappen er klikket");
+        // console.log("C-knappen er klikket"); sjekker om funksjonen kjører
     }
+    //TODO: EventListeners to track user input + TODO: Count the element types and total and print to interface
+    // addEventListner click med funksjon som tegner blå firkant og oppdaterer tellere
+    squareBtn.addEventListener("click", function () {
+        drawSquare(square.x, square.y, (fillColor = "#0000FF"));
+        document.getElementById("squareCount").innerHTML = squareCounter++ //oppdaterer telleren til antall klikk på firkantknapp
+        document.getElementById("totalCount").innerHTML = totalCounter++ //når telleren til firkantknappen økes, oppdaterer telleren total basert på antall klikk
+    })
 
-    // addEventlistner click med funksjon som tegner gul sirkel
+    // addEventlistner click med funksjon som tegner gul sirkel og oppdaterer tellere
     circleBtn.addEventListener("click", function () {
         drawCircle(circle.x, circle.y, circle.radius, circle.startAngle, circle.endAngle, (fillColor = "#FFD700"));
         document.getElementById("circleCount").innerHTML = circleCounter++ //oppdaterer telleren til antall klikk på sirkelknapp
         document.getElementById("totalCount").innerHTML = totalCounter++ // når telleren til sirkelknappen økes, oppdaterer telleren total basert på antall klikk
     })
 
-    // addEventlistner keydown til S-knapp og C-knapp
-
+    // addEventlistner keydown til S-knapp og C-knapp og oppdaterer tellere
     document.addEventListener("keydown", function(event){
         if(event.key === "s") {
             drawSquare(square.x, square.y, (fillColor = "#0000FF"));
@@ -140,20 +139,24 @@
     })
 
 
+        //TODO: Function to remove random element:
+    
+    const removeElement = 
 
-            //TODO: Function to add an element of parameter type 'square' or 'circle'
+    function randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
 
-            //TODO: Function to remove random element:
+        console.log(drawCircle);
+        console.log(drawSquare);
+        console.log(elements);
 
-            //TODO: EventListeners to track user input:
-
-            //TODO: Count the element types and total and print to interface
 
 
         //Function to draw on canvas:
         function renderDrawings() {
             //Clear the rectangle
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            //ctx.clearRect(0, 0, canvas.width, canvas.height)
 
             //TODO: Draw the elements on canvas:
 
@@ -164,7 +167,7 @@
             requestAnimationFrame(renderDrawings)
         }
         //Start drawing
-        //renderDrawings()
+        //renderDrawings() kommentert ut for å slippe at den løper i bakgrunnen som en maniac
     </script>
 </body>
 </html>
